@@ -1,0 +1,21 @@
+{
+  "production": true,
+  "apiServiceBasePath": "http://localhost:8060",
+  "colors": {
+    "tasks": {
+      "importanceColors": {
+        "useful": "",
+        "valuable": "",
+        "critical": "crimson-negative"
+      },
+      "statusColors": {
+        "complete": "green-positive"
+      }
+    }
+  },
+  "keycloak": {
+    "issuer": "http://localhost:8010/auth/",
+    "realm": "lema",
+    "clientId": "lema_ui"
+  }
+}

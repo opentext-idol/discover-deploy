@@ -1,0 +1,33 @@
+#
+# (c) Copyright 2021 Micro Focus or one of its affiliates.
+#
+# Licensed under the MIT License (the "License"); you may not use this file
+# except in compliance with the License.
+#
+# The only warranties for products and services of Micro Focus and its affiliates
+# and licensors ("Micro Focus") are as may be set forth in the express warranty
+# statements accompanying such products and services. Nothing herein should be
+# construed as constituting an additional warranty. Micro Focus shall not be
+# liable for technical or editorial errors or omissions contained herein. The
+# information contained herein is subject to change without notice.
+#
+
+services:
+
+  analysis-service:
+    image: ${ISOL_DOCKER_REGISTRY}/idol-solutions/analysis-nifi:${ISOL_VERSION}
+    networks:
+      - main
+    ports:
+      - ${ISOL_ANALYSIS_SERVICE_DOCKER_PORT}:8090
+    environment:
+      - ISOL_LICENSE_SERVER_HOST=${ISOL_LICENSE_SERVER_HOST}
+      - ISOL_LICENSE_SERVER_PORT=${ISOL_LICENSE_SERVER_PORT}
+      - ISOL_ENTITY_STORE_HOST=${ISOL_ENTITY_SERVICE_HOST}
+      - ISOL_ENTITY_STORE_PORT=${ISOL_ENTITY_SERVICE_PORT}
+      - ISOL_ENTITY_STORE_PATH=${ISOL_ENTITY_SERVICE_PATH}
+      - ISOL_ENTITY_STORE_TRAVERSAL_SOURCE=${ISOL_ENTITY_SERVICE_TRAVERSAL_SOURCE}
+      - ISOL_FILE_STORE_URL=${ISOL_EXTERNAL_PROTOCOL}://${ISOL_FILESTORE_SERVICE_HOST}:${ISOL_FILESTORE_SERVICE_PORT}${ISOL_FILESTORE_SERVICE_PATH}
+      - ISOL_FILE_STORE_USER=${ISOL_FILESTORE_SERVICE_USERNAME}
+      - ISOL_FILE_STORE_PASSWORD=${ISOL_FILESTORE_SERVICE_PASSWORD}
+      - ISOL_FILE_STORE_BUCKET=${ISOL_FILESTORE_SERVICE_BUCKET}
