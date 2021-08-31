@@ -14,12 +14,13 @@ Log in to gain access to the Micro Focus IDOL containers on Docker Hub:
 docker login -u microfocusidolreadonly
 ```
 
-Run the `deploy.py` tool using Python.  Much like when running `docker` or `docker-compose`, you may
-have to run it as a different user with sufficient permissions to manage Docker containers.
+Configure the location of your IDOL License Server in `config/base.env`, and grant the `admin` role
+in your License Server configuration to the host you will deploy the `analysis` component to.
 
-To immediately deploy all components on the same Docker host, configure the location of your License
-Server in `config/base.env`, add TLS certificates in `config/https/` (see the `Encryption` section),
-and run:
+Add TLS certificates in `config/https/` (see the `Encryption` section).
+
+Run the `deploy.py` tool using Python.  (Much like when running `docker` or `docker-compose`, you
+may have to run it as a different user with sufficient permissions to manage Docker containers.)
 
 ```
 python3 deploy.py --init auth entity filestore analysis audit api ui
