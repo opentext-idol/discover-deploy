@@ -15,7 +15,7 @@
 services:
 
   auth-setup:
-    image: ${ISOL_DOCKER_REGISTRY}/idol-solutions/auth-setup:${ISOL_VERSION}
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-auth-setup${ISOL_DOCKER_VERSION_SEP}${ISOL_VERSION}
     networks:
       - main
     environment:
