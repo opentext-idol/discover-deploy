@@ -52,6 +52,8 @@ directory.  The required files are:
   the API.  Extra configuration is required in `config/api.env`.
 - `config/https/auth/tls.key`: Private key for the authentication server.
 - `config/https/auth/tls.crt`: Server certificate for the authentication server.
+- `config/ui/auth/nginx.key`: Private key for the UI.
+- `config/ui/auth/nginx.crt`: Server certificate for the UI.
 
 ## Further examples
 
