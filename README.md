@@ -65,6 +65,8 @@ To use HTTP instead of HTTPS, for testing purposes only, run:
 python3 deploy.py --disable-encryption --init auth entity filestore analysis audit api ui
 ```
 
+> note: changes to the encryption state of a deployed system require manual deletion of the realm in Keycloak before running `deploy.py` with the new state.
+
 To resume a stopped LEMA system, or to apply changes made to configuration files, or to change which
 components are deployed: run the normal command to deploy, but without the `--init` argument:
 
