@@ -50,8 +50,8 @@ By default, the user-facing servers (authentication server, API, and UI) only ac
 connections.  For this to work, you must obtain TLS certificates and copy them into the `config` 
 directory.  The required files are:
 
-- `config/https/api/keystore.jks`: Java Keystore containing private key and server certificate for 
-  the API.  Extra configuration is required in `config/api.env`.
+- `config/https/api/tls.key`: Private key for the API.
+- `config/https/api/tls.crt`: Server certificate for the API.
 - `config/https/auth/tls.key`: Private key for the authentication server.
 - `config/https/auth/tls.crt`: Server certificate for the authentication server.
 - `config/ui/auth/nginx.key`: Private key for the UI.
