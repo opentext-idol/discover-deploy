@@ -1,6 +1,9 @@
 {
   "production": true,
   "apiServiceBasePath": "http://localhost:8060",
+  "global": {
+    "serverPollingInterval": 10000
+  },
   "colors": {
     "tasks": {
       "importanceColors": {
