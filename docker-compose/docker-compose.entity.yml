@@ -14,6 +14,18 @@
 
 services:
 
+  entity-indexdb:
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-indexdb${ISOL_DOCKER_VERSION_SEP}${ISOL_VERSION}
+    networks:
+      - main
+    ports:
+      - ${ISOL_ENTITY_INDEXDB_ACI_DOCKER_PORT}:9100
+      - ${ISOL_ENTITY_INDEXDB_INDEX_DOCKER_PORT}:9101
+    environment:
+      - ISOL_LICENSE_SERVER_HOST=${ISOL_LICENSE_SERVER_HOST}
+      - ISOL_LICENSE_SERVER_PORT=${ISOL_LICENSE_SERVER_PORT}
+
+
   entity-service:
     image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-service${ISOL_DOCKER_VERSION_SEP}${ISOL_VERSION}
     networks:
@@ -22,6 +34,10 @@ services:
       - entity-service-data:/var/lib/janusgraph
     ports:
       - ${ISOL_ENTITY_SERVICE_DOCKER_PORT}:8182
+    environment:
+      - ISOL_ENTITY_INDEXDB_HOST=entity-indexdb
+      - ISOL_ENTITY_INDEXDB_ACI_PORT=9100
+      - ISOL_ENTITY_INDEXDB_INDEX_PORT=9101
 
 volumes:
   entity-service-data:

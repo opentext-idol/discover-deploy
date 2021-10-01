@@ -95,6 +95,8 @@ while others listen on 127.0.0.1 only):
 | auth | 8000 | no | PostgreSQL database storing authentication server configuration |
 | auth | 8010 | yes | Keycloak authentication server (API and admin UI) |
 | entity | 8020 | no | Gremlin database storing application data |
+| entity | 8021 | no | ACI port of IDOL Content database backend for the Gremlin database |
+| entity | 8022 | no | Index port of IDOL Content database backend for the Gremlin database |
 | filestore | 8030 | no | S3-compatible object storage |
 | analysis | 8040 | no | NiFi server for media analysis (API and admin UI) |
 | audit | 8050 | no | PostgreSQL database storing audit logs |
