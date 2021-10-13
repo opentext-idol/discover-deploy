@@ -29,7 +29,7 @@ python3 deploy.py --init auth entity filestore analysis audit api ui
 With the default configuration, the LEMA UI will be available at `https://localhost:8070` once the
 system has started.
 
-After the system has started, log in with a user that has the `api.initialize` role. The LEMA UI will then perform a one off initialization. 
+After the system has started, log in with a user that has the `admin` role. The LEMA UI will then perform a one off initialization. 
 
 To show options and other usage information, run:
 
@@ -97,6 +97,7 @@ while others listen on 127.0.0.1 only):
 | entity | 8020 | no | Gremlin database storing application data |
 | entity | 8021 | no | ACI port of IDOL Content database backend for the Gremlin database |
 | entity | 8022 | no | Index port of IDOL Content database backend for the Gremlin database |
+| entity | 8023 | no | Port of Cassandra database backend for the Gremlin database |
 | filestore | 8030 | no | S3-compatible object storage |
 | analysis | 8040 | no | NiFi server for media analysis (API and admin UI) |
 | audit | 8050 | no | PostgreSQL database storing audit logs |
@@ -109,7 +110,8 @@ Docker volumes are created with the prefix `micro-focus-idol-lema_`, which can b
 | **Component** | **Volume name** | **Purpose** |
 |---------------|-----------------|-------------|
 | auth | auth-db-data | Authentication server configuration |
-| entity | entity-service-data | Application data |
+| entity | entity-storagedb-data | Application data |
+| entity | entity-service-data | Search index for application data |
 | filestore | filestore-service-data | Uploaded and generated files |
 | audit | audit-db-data | Audit logs |
 
