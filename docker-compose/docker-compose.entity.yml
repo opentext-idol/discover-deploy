@@ -15,7 +15,7 @@
 services:
 
   entity-indexdb:
-    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-indexdb${ISOL_DOCKER_VERSION_SEP}${ISOL_VERSION}
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-indexdb${ISOL_DOCKER_VERSION_SEP}${ISOL_BASE_VERSION}
     networks:
       - main
     ports:
@@ -25,6 +25,14 @@ services:
       - ISOL_LICENSE_SERVER_HOST=${ISOL_LICENSE_SERVER_HOST}
       - ISOL_LICENSE_SERVER_PORT=${ISOL_LICENSE_SERVER_PORT}
 
+  entity-storagedb:
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-storagedb${ISOL_DOCKER_VERSION_SEP}${ISOL_BASE_VERSION}
+    networks:
+      - main
+    volumes:
+      - entity-storagedb-data:/var/lib/cassandra
+    ports:
+      - ${ISOL_ENTITY_STORAGEDB_DOCKER_PORT}:9042
 
   entity-service:
     image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-service${ISOL_DOCKER_VERSION_SEP}${ISOL_VERSION}
@@ -35,9 +43,12 @@ services:
     ports:
       - ${ISOL_ENTITY_SERVICE_DOCKER_PORT}:8182
     environment:
+      - ISOL_ENTITY_STORAGEDB_HOST=entity-storagedb
+      - ISOL_ENTITY_STORAGEDB_PORT=9042
       - ISOL_ENTITY_INDEXDB_HOST=entity-indexdb
       - ISOL_ENTITY_INDEXDB_ACI_PORT=9100
       - ISOL_ENTITY_INDEXDB_INDEX_PORT=9101
 
 volumes:
+  entity-storagedb-data:
   entity-service-data:
