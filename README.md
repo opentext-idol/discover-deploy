@@ -110,8 +110,9 @@ Docker volumes are created with the prefix `micro-focus-idol-lema_`, which can b
 | **Component** | **Volume name** | **Purpose** |
 |---------------|-----------------|-------------|
 | auth | auth-db-data | Authentication server configuration |
+| entity | entity-schemadb-data | Schema for application data |
 | entity | entity-storagedb-data | Application data |
-| entity | entity-service-data | Search index for application data |
+| entity | entity-indexdb-data | Search index for application data |
 | filestore | filestore-service-data | Uploaded and generated files |
 | audit | audit-db-data | Audit logs |
 
