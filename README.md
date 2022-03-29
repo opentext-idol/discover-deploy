@@ -1,5 +1,7 @@
 # Law Enforcement Media Application (LEMA)
 
+The following installation steps compliment the full LEMA Administration Guide, available from the [IDOL documentation site](https://www.microfocus.com/documentation/idol/), under "IDOL Government Solutions".
+
 ## Basic deployment
 
 To deploy LEMA to a Docker system, use the `deploy.py` tool, which requires Docker Compose.
