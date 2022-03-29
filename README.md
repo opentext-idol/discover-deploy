@@ -8,11 +8,13 @@ Required software versions:
 - Docker, version 1.13.0 or later
 - Docker Compose, version 1.10.0 or later
 
-Log in to gain access to the Micro Focus IDOL containers on Docker Hub:
+Log in with your own password to gain access to the Micro Focus IDOL containers on Docker Hub:
 
 ```
 docker login -u microfocusidolreadonly
 ```
+
+> To obtain your password (API key) contact Micro Focus support.
 
 Configure the location of your IDOL License Server in `config/base.env`, and grant the `admin` role
 in your License Server configuration to the host you will deploy the `analysis` component to.
