@@ -120,7 +120,7 @@ def run_compose(docker_host, components, detach=True, remove=False, log_level='i
     compose_args = ['docker-compose']
     compose_args.extend(['--log-level', log_level])
     if docker_host is not None:
-        compose_args.extend(['--docker-host', docker_host])
+        compose_args.extend(['--host', docker_host])
     compose_args.extend(['--env-file', build_env_file(get_env_paths(components))])
     for compose_path in get_compose_paths(components):
         compose_args.extend(['--file', compose_path])
