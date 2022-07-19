@@ -15,11 +15,12 @@
 services:
 
   entity-indexdb:
-    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-indexdb${ISOL_DOCKER_VERSION_SEP}${ISOL_BASE_VERSION}
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-indexdb${ISOL_DOCKER_VERSION_SEP}${ISOL_VERSION}
     networks:
       - main
     volumes:
       - entity-indexdb-data:/content/index
+      - entity-indexdb-license-data:/content/license-cache
     ports:
       - ${ISOL_ENTITY_INDEXDB_ACI_DOCKER_PORT}:9100
       - ${ISOL_ENTITY_INDEXDB_INDEX_DOCKER_PORT}:9101
@@ -28,30 +29,18 @@ services:
       - ISOL_LICENSE_SERVER_PORT=${ISOL_LICENSE_SERVER_PORT}
 
   entity-storagedb:
-    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-storagedb${ISOL_DOCKER_VERSION_SEP}${ISOL_BASE_VERSION}
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-storagedb${ISOL_DOCKER_VERSION_SEP}${ISOL_VERSION}
     networks:
       - main
     volumes:
       - entity-storagedb-data:/var/lib/cassandra
     ports:
       - ${ISOL_ENTITY_STORAGEDB_DOCKER_PORT}:9042
-
-  entity-service:
-    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-service${ISOL_DOCKER_VERSION_SEP}${ISOL_VERSION}
-    networks:
-      - main
-    volumes:
-      - entity-schemadb-data:/var/lib/janusgraph
-    ports:
-      - ${ISOL_ENTITY_SERVICE_DOCKER_PORT}:8182
     environment:
-      - ISOL_ENTITY_STORAGEDB_HOST=entity-storagedb
-      - ISOL_ENTITY_STORAGEDB_PORT=9042
-      - ISOL_ENTITY_INDEXDB_HOST=entity-indexdb
-      - ISOL_ENTITY_INDEXDB_ACI_PORT=9100
-      - ISOL_ENTITY_INDEXDB_INDEX_PORT=9101
+      - MAX_HEAP_SIZE=${ISOL_ENTITY_STORAGEDB_MAX_HEAP_SIZE}
+      - HEAP_NEWSIZE=${ISOL_ENTITY_STORAGEDB_HEAP_NEWSIZE}
 
 volumes:
-  entity-schemadb-data:
   entity-storagedb-data:
   entity-indexdb-data:
+  entity-indexdb-license-data:

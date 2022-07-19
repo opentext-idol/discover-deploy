@@ -98,7 +98,6 @@ while others listen on 127.0.0.1 only):
 |---------------|----------|---------------|-------------|
 | auth | 8000 | no | PostgreSQL database storing authentication server configuration |
 | auth | 8010 | yes | Keycloak authentication server (API and admin UI) |
-| entity | 8020 | no | Gremlin database storing application data |
 | entity | 8021 | no | ACI port of IDOL Content database backend for the Gremlin database |
 | entity | 8022 | no | Index port of IDOL Content database backend for the Gremlin database |
 | entity | 8023 | no | Port of Cassandra database backend for the Gremlin database |
@@ -111,14 +110,14 @@ while others listen on 127.0.0.1 only):
 Docker volumes are created with the prefix `micro-focus-idol-lema_`, which can be changed using the
 `COMPOSE_PROJECT_NAME` setting.  The following volumes are created:
 
-| **Component** | **Volume name** | **Purpose** |
-|---------------|-----------------|-------------|
-| auth | auth-db-data | Authentication server configuration |
-| entity | entity-schemadb-data | Schema for application data |
-| entity | entity-storagedb-data | Application data |
-| entity | entity-indexdb-data | Search index for application data |
-| filestore | filestore-service-data | Uploaded and generated files |
-| audit | audit-db-data | Audit logs |
+| **Component** | **Volume name**             | **Purpose**                         |
+|---------------|-----------------------------|-------------------------------------|
+| auth          | auth-db-data                | Authentication server configuration |
+| entity        | entity-storagedb-data       | Application data                    |
+| entity        | entity-indexdb-data         | Search index for application data   |
+| entity        | entity-indexdb-license-data | Cache for license information       |
+| filestore     | filestore-service-data      | Uploaded and generated files        |
+| audit         | audit-db-data               | Audit logs                          |
 
 All containers connect to a Docker network called `micro-focus-idol-lema_main`.  The
 `micro-focus-idol-lema` prefix can be changed using the `COMPOSE_PROJECT_NAME` setting.
