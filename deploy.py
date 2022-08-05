@@ -1,5 +1,5 @@
 #
-# (c) Copyright 2021 Micro Focus or one of its affiliates.
+# (c) Copyright 2021-2022 Micro Focus or one of its affiliates.
 #
 # Licensed under the MIT License (the "License"); you may not use this file
 # except in compliance with the License.
@@ -12,12 +12,12 @@
 # information contained herein is subject to change without notice.
 #
 
-import textwrap
-import sys
+import argparse
 import os
 import shutil
 import subprocess
-import argparse
+import sys
+import textwrap
 
 COMPONENT_DEFAULT = object()
 COMPONENTS = [
@@ -26,6 +26,7 @@ COMPONENTS = [
     'entity',
     'filestore',
     'analysis',
+    'analysis-live',
     'audit',
     'api',
     'ui',
@@ -59,6 +60,7 @@ The components that can only be deployed using this script are:
 
 - entity: storage for application data
 - analysis: media analysis system
+- analysis-live: live media analysis system
 - api: user-facing web server
 - ui: user-facing web server
 

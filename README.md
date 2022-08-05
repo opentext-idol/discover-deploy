@@ -66,7 +66,7 @@ directory.  The required files are:
 To use HTTP instead of HTTPS, for testing purposes only, run:
 
 ```
-python3 deploy.py --disable-encryption --init auth entity filestore analysis audit api ui
+python3 deploy.py --disable-encryption --init auth entity filestore analysis analysis-live audit api ui
 ```
 
 > note: changes to the encryption state of a deployed system require manual deletion of the realm in Keycloak before running `deploy.py` with the new state.
@@ -75,7 +75,7 @@ To resume a stopped LEMA system, or to apply changes made to configuration files
 components are deployed: run the normal command to deploy, but without the `--init` argument:
 
 ```
-python3 deploy.py auth entity filestore analysis audit api ui
+python3 deploy.py auth entity filestore analysis analysis-live audit api ui
 ```
 
 You can deploy components on different hosts, or deploy some components separately using a
@@ -86,7 +86,7 @@ configure hosts and ports in the files in `config/`, and then run on separate ho
 
 ```
 python3 deploy.py audit
-python3 deploy.py --init auth entity analysis api ui
+python3 deploy.py --init auth entity analysis analysis-live api ui
 ```
 
 ## System information
@@ -94,30 +94,32 @@ python3 deploy.py --init auth entity analysis api ui
 By default, the following ports are forwarded ('public' ports listen on all interfaces (0.0.0.0),
 while others listen on 127.0.0.1 only):
 
-| **Component** | **Port** | **Public** | **Purpose** |
-|---------------|----------|---------------|-------------|
-| auth | 8000 | no | PostgreSQL database storing authentication server configuration |
-| auth | 8010 | yes | Keycloak authentication server (API and admin UI) |
-| entity | 8021 | no | ACI port of IDOL Content database backend for the Gremlin database |
-| entity | 8022 | no | Index port of IDOL Content database backend for the Gremlin database |
-| entity | 8023 | no | Port of Cassandra database backend for the Gremlin database |
-| filestore | 8030 | no | S3-compatible object storage |
-| analysis | 8040 | no | NiFi server for media analysis (API and admin UI) |
-| audit | 8050 | no | PostgreSQL database storing audit logs |
-| api | 8060 | yes | System HTTP API |
-| ui | 8070 | yes | LEMA UI |
+| **Component** | **Port** | **Public** | **Purpose**                                                          |
+|---------------|----------|------------|----------------------------------------------------------------------|
+| auth          | 8000     | no         | PostgreSQL database storing authentication server configuration      |
+| auth          | 8010     | yes        | Keycloak authentication server (API and admin UI)                    |
+| entity        | 8021     | no         | ACI port of IDOL Content database backend for the Gremlin database   |
+| entity        | 8022     | no         | Index port of IDOL Content database backend for the Gremlin database |
+| entity        | 8023     | no         | Port of Cassandra database backend for the Gremlin database          |
+| filestore     | 8030     | no         | S3-compatible object storage                                         |
+| analysis      | 8040     | no         | NiFi server for media analysis (API and admin UI)                    |
+| analysis-live | 8080     | no         | ACI port of IDOL Media Server used for live media analysis           |
+| audit         | 8050     | no         | PostgreSQL database storing audit logs                               |
+| api           | 8060     | yes        | System HTTP API                                                      |
+| ui            | 8070     | yes        | LEMA UI                                                              |
 
 Docker volumes are created with the prefix `micro-focus-idol-lema_`, which can be changed using the
 `COMPOSE_PROJECT_NAME` setting.  The following volumes are created:
 
-| **Component** | **Volume name**             | **Purpose**                         |
-|---------------|-----------------------------|-------------------------------------|
-| auth          | auth-db-data                | Authentication server configuration |
-| entity        | entity-storagedb-data       | Application data                    |
-| entity        | entity-indexdb-data         | Search index for application data   |
-| entity        | entity-indexdb-license-data | Cache for license information       |
-| filestore     | filestore-service-data      | Uploaded and generated files        |
-| audit         | audit-db-data               | Audit logs                          |
+| **Component** | **Volume name**                        | **Purpose**                         |
+|---------------|----------------------------------------|-------------------------------------|
+| auth          | auth-db-data                           | Authentication server configuration |
+| entity        | entity-storagedb-data                  | Application data                    |
+| entity        | entity-indexdb-data                    | Search index for application data   |
+| entity        | entity-indexdb-license-data            | Cache for license information       |
+| filestore     | filestore-service-data                 | Uploaded and generated files        |
+| analysis-live | analysis-live-mediaserver-license-data | Cache for license information       |
+| audit         | audit-db-data                          | Audit logs                          |
 
 All containers connect to a Docker network called `micro-focus-idol-lema_main`.  The
 `micro-focus-idol-lema` prefix can be changed using the `COMPOSE_PROJECT_NAME` setting.

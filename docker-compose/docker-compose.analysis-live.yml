@@ -1,0 +1,30 @@
+#
+# (c) Copyright 2022 Micro Focus or one of its affiliates.
+#
+# Licensed under the MIT License (the "License"); you may not use this file
+# except in compliance with the License.
+#
+# The only warranties for products and services of Micro Focus and its affiliates
+# and licensors ("Micro Focus") are as may be set forth in the express warranty
+# statements accompanying such products and services. Nothing herein should be
+# construed as constituting an additional warranty. Micro Focus shall not be
+# liable for technical or editorial errors or omissions contained herein. The
+# information contained herein is subject to change without notice.
+#
+
+services:
+
+  analysis-live-mediaserver:
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-analysis-live-mediaserver${ISOL_DOCKER_VERSION_SEP}${ISOL_BASE_VERSION}
+    networks:
+      - main
+    volumes:
+      - analysis-live-mediaserver-license-data:/mediaserver/license-cache
+    ports:
+      - ${ISOL_ANALYSIS_LIVE_MEDIASERVER_ACI_DOCKER_PORT}:14000
+    environment:
+      - ISOL_LICENSE_SERVER_HOST=${ISOL_LICENSE_SERVER_HOST}
+      - ISOL_LICENSE_SERVER_PORT=${ISOL_LICENSE_SERVER_PORT}
+
+volumes:
+  analysis-live-mediaserver-license-data:
