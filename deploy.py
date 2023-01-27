@@ -21,7 +21,6 @@ import textwrap
 
 COMPONENT_DEFAULT = object()
 COMPONENTS = [
-    COMPONENT_DEFAULT,
     'auth',
     'entity',
     'filestore',
@@ -31,6 +30,7 @@ COMPONENTS = [
     'api',
     'ui',
 ]
+COMPONENTS_CHOICES = COMPONENTS + [COMPONENT_DEFAULT]
 BASE_PATH = os.path.dirname(os.path.abspath(sys.argv[0]))
 OUTPUT_WIDTH = min(100, shutil.get_terminal_size()[0])
 
@@ -78,7 +78,7 @@ replacements, are:
 def parse_args():
     p = argparse.ArgumentParser(description=DESCRIPTION,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument('component', nargs='*', default=COMPONENT_DEFAULT, choices=COMPONENTS,
+    p.add_argument('component', nargs='*', default=COMPONENT_DEFAULT, choices=COMPONENTS_CHOICES,
                    metavar='COMPONENT', help='components to deploy')
     p.add_argument('--docker-host', metavar='HOST',
                    help='Docker host to run containers on (default: use Docker running locally)')
@@ -122,20 +122,22 @@ def get_compose_paths(components):
             yield path
 
 
-def run_compose(components, options, detach=True, remove=False, log_level='info'):
-    # base should be first
-    components = ['base'] + list(components)
-
-    compose_args = ['docker-compose']
-    compose_args.extend(['--log-level', log_level])
+def get_compose_args(components, options, log_level):
+    compose_args = ['docker', '--log-level', log_level]
     if options.docker_host is not None:
         compose_args.extend(['--host', options.docker_host])
+    compose_args.append('compose')
     env_paths = (list(get_env_paths(components)) +
                  ([] if options.config_file is None else [options.config_file]))
     compose_args.extend(['--env-file', build_env_file(env_paths)])
     for compose_path in get_compose_paths(components):
         compose_args.extend(['--file', compose_path])
+    return compose_args
 
+
+def run_compose(components, options, detach=True, remove=False, log_level='info'):
+    # base should be first
+    compose_args = get_compose_args(['base'] + list(components), options, log_level)
     if not options.skip_pull:
         subprocess.check_call(compose_args + ['pull'])
 
@@ -172,6 +174,11 @@ def main():
     # we set COMPONENT_DEFAULT to a unique object, set it as valid, and set it as the default
     # then if no values are specified, argparse gives us COMPONENT_DEFAULT instead of a list
     components = [] if program_args.component is COMPONENT_DEFAULT else program_args.component
+    # If no components were listed to be started, perform docker compose down
+    if not components:
+        compose_args = get_compose_args(['base'] + COMPONENTS, program_args, log_level='error')
+        subprocess.check_call(compose_args + ['down'] + ['--remove-orphans'])
+        quit()
     deploy(components, program_args)
     if program_args.init:
         initialise(program_args)
