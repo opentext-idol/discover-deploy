@@ -10,13 +10,13 @@ Required software versions:
 - Docker, version 20.10.22 or later
 - Docker Compose, version 2.14.1 or later
 
-Log in with your own password to gain access to the Micro Focus IDOL containers on Docker Hub:
+Log in with your own password to gain access to the OpenText IDOL containers on Docker Hub:
 
 ```
 docker login -u microfocusidolreadonly
 ```
 
-> To obtain your password (API key) contact Micro Focus support.
+> To obtain your password (API key) contact OpenText support.
 
 Configure the location of your IDOL License Server in `config/base.env`, and grant the `admin` role
 in your License Server configuration to the host you will deploy the `analysis` component to.
@@ -114,7 +114,7 @@ while others listen on 127.0.0.1 only):
 | api           | 8060     | yes        | System HTTP API                                                      |
 | ui            | 8070     | yes        | LEMA UI                                                              |
 
-Docker volumes are created with the prefix `micro-focus-idol-lema_`, which can be changed using the
+Docker volumes are created with the prefix `opentext-idol-lema_`, which can be changed using the
 `COMPOSE_PROJECT_NAME` setting.  The following volumes are created:
 
 | **Component** | **Volume name**                        | **Purpose**                                      |
@@ -128,5 +128,5 @@ Docker volumes are created with the prefix `micro-focus-idol-lema_`, which can b
 | analysis-live | analysis-live-mediaserver-output       | Temporary video and data files for live analysis |
 | audit         | audit-db-data                          | Audit logs                                       |
 
-All containers connect to a Docker network called `micro-focus-idol-lema_main`.  The
-`micro-focus-idol-lema` prefix can be changed using the `COMPOSE_PROJECT_NAME` setting.
+All containers connect to a Docker network called `opentext-idol-lema_main`.  The
+`opentext-idol-lema` prefix can be changed using the `COMPOSE_PROJECT_NAME` setting.
