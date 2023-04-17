@@ -66,7 +66,7 @@ directory.  The required files are:
 To use HTTP instead of HTTPS, for testing purposes only, run:
 
 ```
-python3 deploy.py --disable-encryption --init auth entity filestore analysis analysis-live audit api ui
+python3 deploy.py --disable-encryption --init auth entity filestore analysis audit api ui
 ```
 
 > note: changes to the encryption state of a deployed system require manual deletion of the realm in Keycloak before running `deploy.py` with the new state.
@@ -75,7 +75,7 @@ To resume a stopped LEMA system, or to apply changes made to configuration files
 components are deployed: run the normal command to deploy, but without the `--init` argument:
 
 ```
-python3 deploy.py auth entity filestore analysis analysis-live audit api ui
+python3 deploy.py auth entity filestore analysis audit api ui
 ```
 
 To stop and remove deployed LEMA services, run the Python `deploy.py` tool with no arguments:
@@ -92,7 +92,7 @@ configure hosts and ports in the files in `config/`, and then run on separate ho
 
 ```
 python3 deploy.py audit
-python3 deploy.py --init auth entity analysis analysis-live api ui
+python3 deploy.py --init auth entity analysis api ui
 ```
 
 ## System information
@@ -109,7 +109,6 @@ while others listen on 127.0.0.1 only):
 | entity        | 8023     | no         | Port of Cassandra database backend for the Gremlin database          |
 | filestore     | 8030     | no         | S3-compatible object storage                                         |
 | analysis      | 8040     | no         | NiFi server for media analysis (API and admin UI)                    |
-| analysis-live | 8080     | no         | ACI port of IDOL Media Server used for live media analysis           |
 | audit         | 8050     | no         | PostgreSQL database storing audit logs                               |
 | api           | 8060     | yes        | System HTTP API                                                      |
 | ui            | 8070     | yes        | LEMA UI                                                              |
@@ -124,8 +123,6 @@ Docker volumes are created with the prefix `opentext-idol-lema_`, which can be c
 | entity        | entity-indexdb-data                    | Search index for application data                |
 | entity        | entity-indexdb-license-data            | Cache for license information                    |
 | filestore     | filestore-service-data                 | Uploaded and generated files                     |
-| analysis-live | analysis-live-mediaserver-license-data | Cache for license information                    |
-| analysis-live | analysis-live-mediaserver-output       | Temporary video and data files for live analysis |
 | audit         | audit-db-data                          | Audit logs                                       |
 
 All containers connect to a Docker network called `opentext-idol-lema_main`.  The
