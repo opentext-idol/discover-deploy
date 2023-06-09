@@ -167,9 +167,21 @@ def run_compose(components, component_paths, options, detach=True, remove=False,
     if not options.skip_pull:
         run_process(get_compose_args(components, component_paths, options,
                                      'pull', log_level=log_level))
+    run_process(get_compose_args(components, component_paths, options,
+                                 'build', log_level=log_level) +
+                ([] if options.skip_pull else ['--pull']))
     if not options.skip_deploy:
         run_process(get_compose_args(components, component_paths, options,
                                      'up', detach, remove, log_level=log_level))
+
+
+def prepare(component_paths, options):
+    run_process(get_compose_args(['data-entity'], component_paths, options,
+                                 'build', log_level='error') +
+                ([] if options.skip_pull else ['--pull']))
+    if not options.skip_deploy:
+        run_process(get_compose_args(['data-entity'], component_paths, options,
+                                     'up', log_level='error'))
 
 
 def deploy(components, component_paths, options):
@@ -196,6 +208,7 @@ def main():
 
     if program_args.component:
         validate_components(program_args.component, component_paths)
+        prepare(component_paths, program_args)
         deploy(program_args.component, component_paths, program_args)
         if program_args.init:
             initialise(component_paths, program_args)
