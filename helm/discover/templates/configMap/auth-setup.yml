@@ -11,7 +11,7 @@ data:
   ISOL_AUTH_SERVICE_API_CLIENT: "{{ .Values.auth.apiClient}}"
   ISOL_AUTH_SERVICE_API_URL: "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}{{ .Values.auth.external.path }}"
   ISOL_AUTH_SERVICE_UI_CLIENT: "{{ .Values.auth.uiClient }}"
-  ISOL_AUTH_SERVICE_UI_URL: "{{ .Values.external.protocol }}://{{ .Values.external.host }}{{ .Values.lemaUi.external.path }}*"
+  ISOL_AUTH_SERVICE_UI_URL: "{{ .Values.external.protocol }}://{{ .Values.external.host }}{{ .Values.discoverUi.external.path }}*"
   ISOL_AUTH_SERVICE_TOKEN_EXPIRY_TIME: "{{ .Values.auth.tokenExpiryTimeSeconds }}"
 
 ---

@@ -21,7 +21,7 @@ httpGet:
   port: 8080
   path: /meta/health/basic
 {{- end }}
-{{- define "probe.lema" -}}
+{{- define "probe.discover" -}}
 httpGet:
   port: 80
   path: /assets/config.json

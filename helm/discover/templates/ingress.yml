@@ -14,13 +14,13 @@ spec:
   rules:
     - http:
         paths:
-          - path: {{ .Values.lemaUi.external.path }}()(.*)
+          - path: {{ .Values.discoverUi.external.path }}()(.*)
             pathType: Prefix
             backend:
               service:
-                name: {{ .Values.lemaUi.service.name }}
+                name: {{ .Values.discoverUi.service.name }}
                 port:
-                  number: {{ .Values.lemaUi.service.port }}
+                  number: {{ .Values.discoverUi.service.port }}
           - path: {{ .Values.auth.external.path }}(.*)
             pathType: Prefix
             backend:

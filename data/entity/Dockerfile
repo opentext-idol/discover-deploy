@@ -15,6 +15,6 @@
 ARG BASE_IMAGE
 FROM $BASE_IMAGE
 
-COPY custom.yaml /source-data/02-custom.yaml
+COPY custom.yaml /source-data/01-custom.yaml
 
 ENTRYPOINT ["/startup.sh"]
