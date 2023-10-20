@@ -24,8 +24,8 @@ docker:
     api: 23.4.0
     datasets: 23.4.0
     analysis: 23.4.0
-    lemaData: 23.4.0
-    lema: 23.4.0
+    discoverData: 23.4.0
+    discover: 23.4.0
     postgres: 15.4
 
 auth:
@@ -36,12 +36,12 @@ auth:
   image: solutions-auth-service
   config: auth-config
   secret: auth-secret
-  adminUser: lema-auth
-  adminPassword: lema-auth
-  realm: lema
-  apiClient: lema_api
+  adminUser: discover-auth
+  adminPassword: discover-auth
+  realm: discover
+  apiClient: discover_api
   apiClientSecret: d0e76ad7-7d6b-4d86-be3a-5dfe715dbf87
-  uiClient: lema_ui
+  uiClient: discover_ui
   tokenExpiryTimeSeconds: 600
   external:
     path: /auth/
@@ -53,9 +53,9 @@ auth:
   db:
     config: auth-db-config
     container: auth-service-db
-    username: lema
-    password: lema
-    database: lema-auth
+    username: discover
+    password: discover
+    database: discover-auth
     dataVolume: auth-db-data
     dataVolumeClaim: auth-db-data
     dataVolumeSize: 1Gi
@@ -104,9 +104,9 @@ filestore:
   dataVolume: filestore-data
   dataVolumeClaim: filestore-data
   dataVolumeSize: 1Ti
-  username: lema-filestore
-  password: lema-filestore
-  bucket: lema-filestore
+  username: discover-filestore
+  password: discover-filestore
+  bucket: discover-filestore
   service:
     protocol: http
     name: filestore-service
@@ -177,7 +177,7 @@ api:
   image: solutions-api-service
   config: api-config
   secret: api-secret
-  applicationType: lema
+  applicationType: discover
   external:
     path: /api/
   expiry:
@@ -203,7 +203,7 @@ api:
 
   dataEntity:
     container: data-entity
-    image: solutions-lema-data-entity
+    image: solutions-discover-data-entity
 
   authSetup:
     container: auth-setup
@@ -211,15 +211,15 @@ api:
     config: auth-setup-config
     secret: auth-setup-secret
 
-lemaUi:
+discoverUi:
   enabled: true
-  name: lema-ui
+  name: discover-ui
   replicas: 2
-  container: lema-ui-container
-  image: lema-ui
-  config: lema-ui-config
+  container: discover-ui-container
+  image: discover-ui
+  config: discover-ui-config
   service:
-    name: lema-ui-service
+    name: discover-ui-service
     port: 80
   external:
-    path: /lema/
+    path: /discover/

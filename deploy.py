@@ -33,10 +33,10 @@ def wrap(text):
 
 
 DESCRIPTION = '''
-Deploy IDOL LEMA.
+Deploy IDOL Discover.
 
 ''' + wrap('''\
-This program deploys components of the LEMA system, or resumes a stopped system, or reconfigures an
+This program deploys components of the Discover system, or resumes a stopped system, or reconfigures an
 existing system.  Before running, check and update the configuration in `config/base.env`.
 ''') + '''
 

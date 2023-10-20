@@ -1,42 +1,42 @@
-{{- if .Values.lemaUi.enabled -}}
+{{- if .Values.discoverUi.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.lemaUi.name }}
+  name: {{ .Values.discoverUi.name }}
 
 spec:
-  replicas: {{ .Values.lemaUi.replicas }}
+  replicas: {{ .Values.discoverUi.replicas }}
   selector:
     matchLabels:
-      component: {{ .Values.lemaUi.name }}
+      component: {{ .Values.discoverUi.name }}
   template:
     metadata:
       labels:
-        component: {{ .Values.lemaUi.name }}
+        component: {{ .Values.discoverUi.name }}
     spec:
       containers:
-        - name: {{ .Values.lemaUi.container }}
+        - name: {{ .Values.discoverUi.container }}
 {{ include "image" (dict
   "Values" .Values
-  "imageName" .Values.lemaUi.image
-  "version" .Values.docker.versions.lema
+  "imageName" .Values.discoverUi.image
+  "version" .Values.docker.versions.discover
   ) | indent 10 }}
           imagePullPolicy: {{ .Values.docker.pullPolicy }}
           ports:
             - containerPort: 80
           envFrom:
             - configMapRef:
-                name: {{ .Values.lemaUi.config }}
+                name: {{ .Values.discoverUi.config }}
           startupProbe:
-{{ include "probe.lema" . | indent 12 }}
+{{ include "probe.discover" . | indent 12 }}
             initialDelaySeconds: 10
             periodSeconds: 10
             failureThreshold: 30
           readinessProbe:
-{{ include "probe.lema" . | indent 12 }}
+{{ include "probe.discover" . | indent 12 }}
             failureThreshold: 2
           livenessProbe:
-{{ include "probe.lema" . | indent 12 }}
+{{ include "probe.discover" . | indent 12 }}
             periodSeconds: 60
             failureThreshold: 20
       imagePullSecrets:
@@ -47,14 +47,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.lemaUi.service.name }}
+  name: {{ .Values.discoverUi.service.name }}
 
 spec:
   type: ClusterIP
   selector:
-    component: {{ .Values.lemaUi.name }}
+    component: {{ .Values.discoverUi.name }}
   ports:
     - name: http
-      port: {{ .Values.lemaUi.service.port }}
+      port: {{ .Values.discoverUi.service.port }}
       targetPort: 80
 {{- end -}}

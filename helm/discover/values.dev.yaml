@@ -13,8 +13,8 @@ docker:
     api: 23.4.0-SNAPSHOT
     datasets: 23.4.0-SNAPSHOT
     analysis: 23.4.0-SNAPSHOT
-    lemaData: 23.4.0-SNAPSHOT
-    lema: 23.4.0-SNAPSHOT
+    discoverData: 23.4.0-SNAPSHOT
+    discover: 23.4.0-SNAPSHOT
 
 entity:
   storage:
@@ -30,5 +30,5 @@ analysis:
 datasets:
   locations:
     replicas: 1
-lemaUi:
+discoverUi:
   replicas: 1
