@@ -18,17 +18,24 @@ spec:
 {{ include "image" (dict
   "Values" .Values
   "imageName" .Values.dataEntity.image
-  "version" .Values.docker.versions.discoverData
+  "version" .Values.docker.versions.lemaData
   ) | indent 10 }}
           imagePullPolicy: {{ .Values.docker.pullPolicy }}
           volumeMounts:
             - name: {{ .Values.initTool.entityData.volume }}
               mountPath: /target-volume
+            - name: {{ .Values.initTool.filesConfig.volumeName }}
+              mountPath: /source-data/02-custom.yaml
+              subPath: entitySchema
+              readOnly: true
 
       volumes:
         - name: {{ .Values.initTool.entityData.volume }}
           persistentVolumeClaim:
             claimName: {{ .Values.initTool.entityData.volumeClaim }}
+        - name: {{ .Values.initTool.filesConfig.volumeName }}
+          configMap:
+            name: {{ .Values.initTool.filesConfig.configName }}
 
       imagePullSecrets:
         - name: {{ .Values.secret.name }}
