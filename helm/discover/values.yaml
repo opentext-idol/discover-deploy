@@ -43,6 +43,7 @@ auth:
   apiClientSecret: d0e76ad7-7d6b-4d86-be3a-5dfe715dbf87
   uiClient: discover_ui
   tokenExpiryTimeSeconds: 600
+  baseRealmRoles: user
   external:
     path: /auth/
   service:
