@@ -31,6 +31,8 @@ auth:
   external:
     # Path on the Kubernetes server to make the Keycloak API and admin UI accessible from
     path: /auth/
+    # External port used to access the Keycloak Admin Console
+    adminPort: 30020
   # PostgreSQL database server storing authentication server configuration
   db:
     # Credentials to configure and use for access
