@@ -139,7 +139,14 @@ api:
     # The default number of entity IDs retrieved in a single entity traversal
     default: 500
     # The default number of entity IDs retrieved in a single suggest traversal
-    suggest: 500
+    suggestDefault: 500
+  idolSecurity:
+    # how access to entities using IDOL document security is managed: community, allowAll, or denyAll
+    mode: denyAll
+    # when mode is community, these should be set to the corresponding configuration values used in the Community
+    # component (SecurityACLFormat, SecurityACLCheck)
+    aclFormat: "<E=B!>:U:<U=SLE+>:G:<G=SLE+>:NU:<NU=SLE->:NG:<NG=SLE->"
+    aclCheck: "NU=[DU]?F:-,NG=[DG]?F:-,E=1?P:-,U=[DU]?P:-,G=[DG]?P:F"
 
 # Discover user interface
 discoverUi:
