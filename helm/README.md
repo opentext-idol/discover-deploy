@@ -21,9 +21,9 @@ You will need to install:
 
 ## Configuration
 
-You can configure Discover by modifying the YAML file `values.yaml`.  It is recommended to review all settings before
-deploying, especially passwords and maximum volume sizes.  Read below to learn about the required values that you must
-fill in.
+You can configure Discover by modifying the YAML file `discover/values.user.yaml`.  It is recommended to review all
+settings before deploying, especially passwords and maximum volume sizes.  Read below to learn about the required values
+that you must fill in.
 
 ### Docker Hub login
 
@@ -62,9 +62,9 @@ helm install --values discover/values.user.yaml discover ./discover/
 ```
 
 After the system has started:
-* Add a user with the `admin` role (refer to the Discover Administration Guide for details).
 * With the default configuration, access the Discover UI at `http://your-kubernetes-server/discover/`.
-* Log in with the user you created. The Discover UI will then perform a one-off initialization.
+* Log in with the admin user (see `auth.createAdminUsername` in `discover/values.user.yaml`). The Discover UI will then
+  perform a one-off initialization.
 
 ## Entities database schema
 

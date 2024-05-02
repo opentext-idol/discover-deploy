@@ -33,7 +33,8 @@ python3 deploy.py auth entity filestore analysis audit dataset-locations api ui
 With the default configuration, the Discover UI will be available at `https://localhost:8090` once the
 system has started.
 
-After the system has started, log in with a user that has the `admin` role. The Discover UI will then perform a one off initialization. 
+After the system has started, log in with the admin user (see `ISOL_INIT_AUTH_ADMIN_USERNAME` in `config/base.env`). The
+Discover UI will then perform a one off initialization.
 
 To show options and other usage information, run:
 

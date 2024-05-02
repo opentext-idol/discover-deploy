@@ -39,6 +39,8 @@ auth:
   adminUser: discover-auth
   adminPassword: discover-auth
   realm: discover
+  createAdminUsername: admin
+  createAdminPassword: admin
   apiClient: discover_api
   apiClientSecret: d0e76ad7-7d6b-4d86-be3a-5dfe715dbf87
   uiClient: discover_ui
