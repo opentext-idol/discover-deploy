@@ -128,6 +128,7 @@ Docker volumes are created with the prefix `opentext-idol-discover_`, which can 
 | audit             | audit-db-data                  | Audit logs                          |
 | dataset-locations | dataset-locations-license-data | Cache for license information       |
 | -                 | entity-data                    | Schema for application data         |
+| -                 | security-data                  | Security-related data               |
 
 All containers connect to a Docker network called `opentext-idol-discover_main`.  The
 `opentext-idol-discover` prefix can be changed using the `COMPOSE_PROJECT_NAME` setting.
