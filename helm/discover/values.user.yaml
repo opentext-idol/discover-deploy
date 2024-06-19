@@ -143,6 +143,11 @@ api:
     default: 500
     # The default number of entity IDs retrieved in a single suggest traversal
     suggestDefault: 500
+  logging:
+    # The log level for general api service log messages
+    apiLogLevel: INFO
+    # The log level for audit related log messages
+    auditLogLevel: WARN
   idolSecurity:
     # how access to entities using IDOL document security is managed: community, allowAll, or denyAll
     mode: denyAll
@@ -150,6 +155,7 @@ api:
     # component (SecurityACLFormat, SecurityACLCheck)
     aclFormat: "<E=B!>:U:<U=SLE+>:G:<G=SLE+>:NU:<NU=SLE->:NG:<NG=SLE->"
     aclCheck: "NU=[DU]?F:-,NG=[DG]?F:-,E=1?P:-,U=[DU]?P:-,G=[DG]?P:F"
+
 
 # Discover user interface
 discoverUi:
