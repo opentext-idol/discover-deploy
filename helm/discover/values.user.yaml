@@ -161,9 +161,10 @@ api:
     # To use this feature, you must also configure entity.service.protocol and entity.index.community
     mode: denyAll
     # When mode is community, these should be set to the corresponding configuration values used in the Community
-    # component (SecurityACLFormat, SecurityACLCheck)
+    # component (SecurityACLFormat, SecurityACLCheck, DocumentSecurityType)
     aclFormat: "<E=B!>:U:<U=SLE+>:G:<G=SLE+>:NU:<NU=SLE->:NG:<NG=SLE->"
     aclCheck: "NU=[DU]?F:-,NG=[DG]?F:-,E=1?P:-,U=[DU]?P:-,G=[DG]?P:F"
+    type: Generic_V4
 
 
 # Discover user interface
