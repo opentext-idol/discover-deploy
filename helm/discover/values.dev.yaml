@@ -1,7 +1,7 @@
 licenseServer:
   ip: "REQUIRED"
 external:
-  host: 192.168.49.2
+  host: &external-host 192.168.49.2
 secret:
   base64dockerconfigjson: "REQUIRED"
 docker:
@@ -16,6 +16,11 @@ docker:
     discoverData: 24.3.0-SNAPSHOT
     discover: 24.3.0-SNAPSHOT
 
+auth:
+  external:
+    host: *external-host
+  image:
+    version: 24.3.0-SNAPSHOT
 entity:
   storage:
     maxHeapSize: 500M

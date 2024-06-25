@@ -1,0 +1,12 @@
+# charts for which we use helm-docs to generate the README.md from README.md.gotmpl
+README_CHARTS:=$(basename $(wildcard */README.md.gotmpl))
+
+HELMDOCS_IMAGE:=jnorwood/helm-docs:latest
+
+.PHONY: all-readmes
+
+all-readmes: ${README_CHARTS}
+
+# generated README.md files
+${README_CHARTS}: %/README.md: %/values.yaml %/Chart.yaml %/README.md.gotmpl
+	docker run --rm -v `pwd`/$*:/helm-docs -u `id -u` ${HELMDOCS_IMAGE}

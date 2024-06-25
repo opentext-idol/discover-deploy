@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      component: {{ .Values.name }}
+  serviceName: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.name }}
+    spec:
+      containers:
+        - name: auth-container
+          image: {{ include "idolsolutions.auth.image" .Values.image | quote }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: {{ .Values.secret }}
+            - configMapRef:
+                name: {{ .Values.config }}
+          startupProbe:
+{{ include "idolsolutions.auth.probe.keycloak" . | indent 12 }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 10
+          readinessProbe:
+{{ include "idolsolutions.auth.probe.keycloak" .| indent 12 }}
+            failureThreshold: 2
+          livenessProbe:
+{{ include "idolsolutions.auth.probe.keycloak" . | indent 12 }}
+            periodSeconds: 60
+            failureThreshold: 20
+
+        - name: auth-service-db
+          image: "postgres:{{ .Values.db.version }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.db.config }}
+          volumeMounts:
+            - name: {{ .Values.db.dataVolume }}
+              mountPath: /var/lib/postgresql/data
+          startupProbe:
+{{ include "idolsolutions.auth.probe.postgres" (dict "username" .Values.db.username) | indent 12 }}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 30
+          readinessProbe:
+{{ include "idolsolutions.auth.probe.postgres" (dict "username" .Values.db.username) | indent 12 }}
+            failureThreshold: 2
+          livenessProbe:
+{{ include "idolsolutions.auth.probe.postgres" (dict "username" .Values.db.username) | indent 12 }}
+            periodSeconds: 60
+            failureThreshold: 20
+      imagePullSecrets:
+      {{- range .Values.global.imagePullSecrets }}
+        - name: {{ . }}
+      {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ .Values.db.dataVolumeClaim }}
+        labels:
+          app.kubernetes.io/instance: {{ $.Release.Name }}
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: {{ .Values.db.dataVolumeStorageClass }}
+        resources:
+          requests:
+            storage: {{ .Values.db.dataVolumeSize }}
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+spec:
+  selector:
+    component: {{ .Values.name }}
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: 8080

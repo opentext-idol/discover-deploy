@@ -15,10 +15,13 @@ spec:
   rules:
     - http:
         paths:
-          - path: {{ .Values.auth.external.path }}resources/(.*)
-            pathType: Prefix
+          - path: {{ .Values.external.path }}resources/(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
-                name: {{ .Values.auth.service.name }}
+                name: {{ .Values.service.name }}
                 port:
-                  number: {{ .Values.auth.service.port }}
+                  number: {{ .Values.service.port }}
+{{- if .Values.external.host }}
+      host: {{ .Values.external.host | quote }}
+{{- end }}
