@@ -60,6 +60,8 @@ auth:
   uiClient: discover_ui
   # Expiry time in seconds for login tokens
   tokenExpiryTimeSeconds: 600
+  # Roles to populate in keycloak
+  baseRealmRoles: user
 
 entity:
   graphName: entities

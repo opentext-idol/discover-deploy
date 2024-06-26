@@ -9,10 +9,10 @@ data:
   ISOL_ENTITY_INDEXDB_ACI_PORT: "{{ .Values.entity.index.service.queryPort }}"
   ISOL_ENTITY_INDEXDB_INDEX_PORT: "{{ .Values.entity.index.service.indexPort }}"
 
-  ISOL_AUTH_SERVICE_PROTOCOL: "{{ .Values.auth.service.protocol }}"
+  ISOL_AUTH_SERVICE_PROTOCOL: "http"
   ISOL_AUTH_SERVICE_HOST: "{{ .Values.auth.service.name }}"
   ISOL_AUTH_SERVICE_PORT: "{{ .Values.auth.service.port }}"
-  ISOL_AUTH_SERVICE_PATH: "{{ .Values.auth.service.path }}"
+  ISOL_AUTH_SERVICE_PATH: "/"
   ISOL_AUTH_SERVICE_EXTERNAL_PROTOCOL: "{{ .Values.external.protocol }}"
   ISOL_AUTH_SERVICE_EXTERNAL_HOST: "{{ .Values.external.host }}"
   ISOL_AUTH_SERVICE_EXTERNAL_PORT: "{{ .Values.external.port }}"
