@@ -1,6 +1,6 @@
 # discover-auth
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 24.2.0](https://img.shields.io/badge/AppVersion-24.2.0-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 24.3.0](https://img.shields.io/badge/AppVersion-24.3.0-informational?style=flat-square)
 
 Provides an authentication backend setup for IDOL Discover or IDOL Search Abstractor
 
@@ -30,7 +30,7 @@ Provides an authentication backend setup for IDOL Discover or IDOL Search Abstra
 | image.pullPolicy | string | `"IfNotPresent"` | used to determine whether to pull the specified image (see https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy) |
 | image.registry | string | `"microfocusidolserver"` | used to construct container image name: {registry}/{image}:{version} |
 | image.repo | string | `"solutions-auth-service"` | used to construct container image name: {registry}/{repo}:{version} |
-| image.version | string | `"24.2.0"` | used to construct container image name: {registry}/{image}:{version} |
+| image.version | string | `"24.3.0"` | used to construct container image name: {registry}/{image}:{version} |
 | name | string | `"auth"` | statefulset name |
 | replicas | int | `1` | statefulset replicas |
 | secret | string | `"auth-secret"` | secret name holding keycloak credentials |
