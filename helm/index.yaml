@@ -1,0 +1,24 @@
+# BEGIN COPYRIGHT NOTICE
+# Copyright 2023-2024 Open Text.
+#
+# The only warranties for products and services of Open Text and its affiliates and licensors
+# ("Open Text") are as may be set forth in the express warranty statements accompanying such
+# products and services. Nothing herein should be construed as constituting an additional warranty.
+# Open Text shall not be liable for technical or editorial errors or omissions contained herein.
+# The information contained herein is subject to change without notice.
+#
+# END COPYRIGHT NOTICE
+apiVersion: v1
+entries:
+  discover-auth:
+  - apiVersion: v2
+    appVersion: 24.3.0
+    created: "2024-06-27T16:32:28.323403567+01:00"
+    description: A Basic IDOL Discover Auth deployment
+    digest: d52ec33b10d1daaae8ba1ff14dc40d10fc3987fe479b7574e978e29546450b91
+    name: discover-auth
+    type: application
+    urls:
+    - release/discover-auth-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-06-27T16:32:28.322539627+01:00"
