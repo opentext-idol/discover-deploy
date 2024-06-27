@@ -67,6 +67,28 @@ directory.  The required files are:
 The entities database can be customized by modifying the file `data/entity/custom.yaml`.  The schema can only be
 customized once, before deploying the system.  Customizations are saved permanently in the `entity-data` volume.
 
+## Document security
+
+When ingesting documents into the system, there are two security models available for controlling access to the
+documents.  Discover implements a system of access controls which is independent of IDOL.  However, if you wish to
+ingest documents from an existing IDOL setup, and preserve the IDOL ACL fields, additional configuration is required.
+
+1. Configure your Community component:
+   * Grant the `api-service` and `analysis-service` components permission to perform ACI actions:
+     * By granting the standard Admin role.
+     * Or, by granting access to actions: `UserRead`, `UserEncryptSecurityInfo`, `UserDecryptSecurityInfo`.
+   * Ensure that `CheckEntitlement` in the `[UserSecurity]` section is set to false (this is the default value).
+2. Configure Discover to use your Community component:
+   * Set `ISOL_ENTITY_INDEXDB_COMMUNITY_PROTOCOL`, `ISOL_ENTITY_INDEXDB_COMMUNITY_HOST`, 
+     `ISOL_ENTITY_INDEXDB_COMMUNITY_ACI_PORT` and `ISOL_ENTITY_IDOL_SECURITY_TYPE` in `config/base.env`.
+   * Set `ISOL_ENTITY_IDOL_SECURITY_ACL_FORMAT` and `ISOL_ENTITY_IDOL_SECURITY_ACL_CHECK` in `config/entity.env`.
+   * Set `ISOL_ENTITY_IDOL_SECURITY_MODE` in `config/api.env`.
+3. Provide Security Info Keys (AES keyfile) for the `entity-indexdb` component:
+   * See `data/security/custom/README.md`.  This must be the Security Info Keys used by your Community component.
+4. Enable HTTPS communications for the `entity-indexdb` component:
+   * Set `ISOL_ENTITY_INDEXDB_PROTOCOL=http` in `config/base.env`.
+   * Optionally, provide your own TLS certificate: see `data/security/custom/README.md`.
+
 ## Further examples
 
 To use HTTP instead of HTTPS, for testing purposes only, run:
@@ -128,6 +150,7 @@ Docker volumes are created with the prefix `opentext-idol-discover_`, which can 
 | audit             | audit-db-data                  | Audit logs                          |
 | dataset-locations | dataset-locations-license-data | Cache for license information       |
 | -                 | entity-data                    | Schema for application data         |
+| -                 | security-data                  | Security-related data               |
 
 All containers connect to a Docker network called `opentext-idol-discover_main`.  The
 `opentext-idol-discover` prefix can be changed using the `COMPOSE_PROJECT_NAME` setting.

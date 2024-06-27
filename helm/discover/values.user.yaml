@@ -29,6 +29,14 @@ entity:
     enabled: true
     # Maximum database size
     dataVolumeSize: 5Gi
+    service:
+      # This must be set to https to use document security
+      protocol: http
+    # External IDOL Community component used for document security
+    community:
+      protocol: http
+      host:
+      aciPort: 9030
   # Cassandra-compatible database backend
   storage:
     # Whether to deploy the component
@@ -124,12 +132,14 @@ api:
     # The log level for audit related log messages
     auditLogLevel: WARN
   idolSecurity:
-    # how access to entities using IDOL document security is managed: community, allowAll, or denyAll
+    # How access to entities using IDOL document security is managed: community, allowAll, or denyAll
+    # To use this feature, you must also configure entity.service.protocol and entity.index.community
     mode: denyAll
-    # when mode is community, these should be set to the corresponding configuration values used in the Community
-    # component (SecurityACLFormat, SecurityACLCheck)
+    # When mode is community, these should be set to the corresponding configuration values used in the Community
+    # component (SecurityACLFormat, SecurityACLCheck, DocumentSecurityType)
     aclFormat: "<E=B!>:U:<U=SLE+>:G:<G=SLE+>:NU:<NU=SLE->:NG:<NG=SLE->"
     aclCheck: "NU=[DU]?F:-,NG=[DG]?F:-,E=1?P:-,U=[DU]?P:-,G=[DG]?P:F"
+    type: Generic_V4
 
 
 # Discover user interface
