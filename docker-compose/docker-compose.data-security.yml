@@ -24,7 +24,7 @@ services:
   data-security-custom:
     image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-data-security-custom${ISOL_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
     build:
-      context: ../data/security
+      context: ../custom/data-security
       args:
         BASE_IMAGE: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-data-security${ISOL_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
     networks:
