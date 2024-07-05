@@ -71,6 +71,29 @@ After the system has started:
 The entities database can be customized by modifying the file `discover/entity-schema.yaml`.  The schema can only be
 customized once, before deploying the system.  Customizations are saved permanently in the `entity-data` volume.
 
+## Custom Docker images
+
+Some components have customizable Docker images.  You can view information about these components in the `README.md`
+files in the `custom` directory (for example, `custom/data-security/custom/README.md`).  To use custom Docker images:
+
+1. Deploy a Docker Registry to serve your custom Docker images.
+2. In `discover/values.user.yaml`, set the `docker.customRegistry.root` to the address of your Docker Registry, as seen
+   from inside your Kubernetes cluster.
+3. In `discover/values.user.yaml`, set `customImage` to `true` for each Docker image you want to customize.
+4. In `custom/build.env`, set `CUSTOM_DOCKER_REGISTRY` to the address of your Docker Registry, as seen from this
+   machine.
+5. Follow the instructions in each `README.md` file in the `custom` directory for each Docker image you want to
+   customize.
+6. In the `custom` directory, for each Docker image you want to customize, run the following commands, replacing the
+   `--file` option with the appropriate path:
+ 
+   ```
+   docker compose --env-file build.env --file data-security/docker-compose.data-security.yml build
+   docker compose --env-file build.env --file data-security/docker-compose.data-security.yml push
+   ```
+
+7. Deploy the application as normal.
+
 ## System information
 
 By default, the following HTTP paths serve requests on port 80 and 443 (HTTPS):

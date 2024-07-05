@@ -20,6 +20,7 @@ spec:
                       "Values" .Values
                       "imageName" .Values.analysis.image
                       "version" .Values.docker.versions.analysis
+                      "custom" .Values.analysis.customImage
                     ) | indent 10 }}
           imagePullPolicy: {{ .Values.docker.pullPolicy }}
           ports:

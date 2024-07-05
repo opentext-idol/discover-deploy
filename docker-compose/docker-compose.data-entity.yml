@@ -24,7 +24,7 @@ services:
   discover-data-entity-custom:
     image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-discover-data-entity-custom${ISOL_DOCKER_VERSION_SEP}${APP_DATA_VERSION}
     build:
-      context: ../data/entity
+      context: ../custom/data-entity
       args:
         BASE_IMAGE: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-discover-data-entity${ISOL_DOCKER_VERSION_SEP}${APP_DATA_VERSION}
     networks:
