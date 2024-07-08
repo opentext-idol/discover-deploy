@@ -19,6 +19,7 @@ spec:
   "Values" .Values
   "imageName" .Values.dataSecurity.image
   "version" .Values.docker.versions.api
+  "custom" .Values.dataSecurity.customImage
   ) | indent 10 }}
           imagePullPolicy: {{ .Values.docker.pullPolicy }}
           envFrom:

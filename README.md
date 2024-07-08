@@ -64,7 +64,7 @@ directory.  The required files are:
 
 ## Entities database schema
 
-The entities database can be customized by modifying the file `data/entity/custom.yaml`.  The schema can only be
+The entities database can be customized by modifying the file `custom/data-entity/custom.yaml`.  The schema can only be
 customized once, before deploying the system.  Customizations are saved permanently in the `entity-data` volume.
 
 ## Document security
@@ -84,10 +84,10 @@ ingest documents from an existing IDOL setup, and preserve the IDOL ACL fields, 
    * Set `ISOL_ENTITY_IDOL_SECURITY_ACL_FORMAT` and `ISOL_ENTITY_IDOL_SECURITY_ACL_CHECK` in `config/entity.env`.
    * Set `ISOL_ENTITY_IDOL_SECURITY_MODE` in `config/api.env`.
 3. Provide Security Info Keys (AES keyfile) for the `entity-indexdb` component:
-   * See `data/security/custom/README.md`.  This must be the Security Info Keys used by your Community component.
+   * See `custom/data-security/custom/README.md`.  This must be the Security Info Keys used by your Community component.
 4. Enable HTTPS communications for the `entity-indexdb` component:
    * Set `ISOL_ENTITY_INDEXDB_PROTOCOL=http` in `config/base.env`.
-   * Optionally, provide your own TLS certificate: see `data/security/custom/README.md`.
+   * Optionally, provide your own TLS certificate: see `custom/data-security/custom/README.md`.
 
 ## Further examples
 
