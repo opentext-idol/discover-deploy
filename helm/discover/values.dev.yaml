@@ -5,9 +5,12 @@ external:
 secret:
   base64dockerconfigjson: "REQUIRED"
 docker:
-  registry: "REQUIRED"
-  nameSeparator: ":"
-  versionSeparator: "-"
+  registry:
+    root: "REQUIRED"
+    nameSeparator: ":"
+    versionSeparator: "-"
+  customRegistry:
+    root: "192.168.49.1:5000/microfocusidolserver"
   versions:
     base: 24.3.0-SNAPSHOT
     api: 24.3.0-SNAPSHOT
@@ -22,6 +25,8 @@ auth:
     host: *external-host
   image:
     version: 24.3.0-SNAPSHOT
+dataSecurity:
+  customImage: false
 entity:
   storage:
     maxHeapSize: 500M
@@ -29,6 +34,7 @@ entity:
 filestore:
   dataVolumeSize: 10Gi
 analysis:
+  customImage: false
   concurrency:
     threads:
       face: 2

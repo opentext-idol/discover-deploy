@@ -19,9 +19,14 @@ secret:
   base64dockerconfigjson:
 
 docker:
-  registry: &docker-registry "microfocusidolserver"
-  nameSeparator: "/"
-  versionSeparator: ":"
+  registry:
+    root:  &docker-registry"microfocusidolserver"
+    nameSeparator: "/"
+    versionSeparator: ":"
+  customRegistry:
+    root: "localhost:5000/microfocusidolserver"
+    nameSeparator: "/"
+    versionSeparator: ":"
   pullPolicy: &docker-pullPolicy IfNotPresent
   versions:
     base: 24.2.0
@@ -36,6 +41,7 @@ docker:
 dataSecurity:
   name: data-security
   container: data-security
+  customImage: false
   image: solutions-data-security
   config: data-security-config
   volume: system-security-data
@@ -106,7 +112,7 @@ entity:
       aciPort: 9030
     service:
       name: entity-index-db-service
-      protocol: http
+      protocol: https
       queryPort: 9100
       indexPort: 9101
     ingress:
@@ -136,6 +142,7 @@ analysis:
   enabled: true
   name: analysis-nifi
   container: analysis-nifi-container
+  customImage: false
   image: solutions-analysis-service
   config: analysis-nifi-config
   secret: analysis-nifi-secret

@@ -12,6 +12,13 @@ external:
   host: &external-host localhost
   port: &external-port 80
 
+docker:
+  customRegistry:
+    root: "localhost:5000/microfocusidolserver"
+
+dataSecurity:
+  customImage: false
+
 # Keycloak authentication server
 auth:
   # Whether to deploy the component
@@ -31,7 +38,7 @@ entity:
     dataVolumeSize: 5Gi
     service:
       # This must be set to https to use document security
-      protocol: http
+      protocol: https
     # External IDOL Community component used for document security
     community:
       protocol: http
@@ -63,6 +70,7 @@ filestore:
 analysis:
   # Whether to deploy the component
   enabled: true
+  customImage: false
   # Number of analysis processes to run in parallel for each analysis type
   concurrency:
     max: 10
