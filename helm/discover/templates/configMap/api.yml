@@ -57,7 +57,6 @@ data:
   ISOL_API_SERVICE_INIT_ENABLED: "{{ .Values.api.initEnabled }}"
   ISOL_API_SERVICE_SCHEDULE_ENABLED: "{{ .Values.api.scheduleEnabled }}"
 
-  ISOL_WATCHLIST_MIN_EVENT_AGE_SECONDS: "{{ .Values.api.watchlists.minEventAgeSeconds }}"
   ISOL_STATS_MIN_ANALYSIS_JOB_EVENT_AGE_SECONDS: "{{ .Values.api.stats.minAnalysisJobAgeSeconds }}"
   ISOL_API_SERVICE_INTERNAL_PORT: "{{ .Values.api.internalPort }}"
   ISOL_ENTITY_EXPIRY_POLE_LIFETIME_DAYS: "{{ .Values.api.expiry.poleLifetimeDays }}"
