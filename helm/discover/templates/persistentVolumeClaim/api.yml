@@ -6,8 +6,6 @@ spec:
   storageClassName: standard
   accessModes:
     - ReadWriteOnce
-    - ReadWriteMany
-    - ReadOnlyMany
   resources:
     requests:
       storage: {{ .Values.dataEntity.volumeSize }}
