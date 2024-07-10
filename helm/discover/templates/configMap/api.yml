@@ -15,10 +15,10 @@ data:
   ISOL_ENTITY_INDEXDB_COMMUNITY_HOST: "{{ .Values.entity.index.community.host }}"
   ISOL_ENTITY_INDEXDB_COMMUNITY_ACI_PORT: "{{ .Values.entity.index.community.aciPort }}"
 
-  ISOL_AUTH_SERVICE_PROTOCOL: "{{ .Values.auth.service.protocol }}"
+  ISOL_AUTH_SERVICE_PROTOCOL: "http"
   ISOL_AUTH_SERVICE_HOST: "{{ .Values.auth.service.name }}"
   ISOL_AUTH_SERVICE_PORT: "{{ .Values.auth.service.port }}"
-  ISOL_AUTH_SERVICE_PATH: "{{ .Values.auth.service.path }}"
+  ISOL_AUTH_SERVICE_PATH: "/"
   ISOL_AUTH_SERVICE_EXTERNAL_PROTOCOL: "{{ .Values.external.protocol }}"
   ISOL_AUTH_SERVICE_EXTERNAL_HOST: "{{ .Values.external.host }}"
   ISOL_AUTH_SERVICE_EXTERNAL_PORT: "{{ .Values.external.port }}"
@@ -27,7 +27,7 @@ data:
   ISOL_AUTH_SERVICE_API_CLIENT: "{{ .Values.auth.apiClient }}"
   ISOL_AUTH_SERVICE_API_URL: "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}{{ .Values.auth.external.path }}"
   ISOL_AUTH_SERVICE_UI_CLIENT: "{{ .Values.auth.uiClient }}"
-  ISOL_AUTH_SERVICE_UI_URL: "{{ .Values.external.protocol }}://{{ .Values.external.host }}{{ .Values.discoverUi.external.path }}*"
+  ISOL_AUTH_SERVICE_UI_URL: "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}{{ .Values.discoverUi.external.path }}*"
   ISOL_AUTH_SERVICE_TOKEN_EXPIRY_TIME: "{{ .Values.auth.tokenExpiryTimeSeconds }}"
   ISOL_AUTH_SERVICE_BASE_REALM_ROLES: "{{ .Values.auth.baseRealmRoles }}"
 
@@ -51,7 +51,7 @@ data:
   ISOL_AUDIT_DATABASE_NAME: "{{ .Values.audit.database }}"
 
   ISOL_API_SERVICE_APPLICATION_TYPE: "{{ .Values.api.applicationType }}"
-  ISOL_API_SERVICE_ALLOWED_ORIGINS:  "{{ .Values.external.protocol }}://{{ .Values.external.host }}"
+  ISOL_API_SERVICE_ALLOWED_ORIGINS:  "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}"
   ISOL_API_SERVICE_BASE_URL: "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}{{ .Values.api.external.path }}"
   ISOL_API_SERVICE_API_ENABLED: "{{ .Values.api.apiEnabled }}"
   ISOL_API_SERVICE_INIT_ENABLED: "{{ .Values.api.initEnabled }}"

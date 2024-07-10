@@ -9,8 +9,8 @@ licenseServer:
 
 # The address of the server running Kubernetes
 external:
-  host: localhost
-  port: 80
+  host: &external-host localhost
+  port: &external-port 80
 
 docker:
   customRegistry:
@@ -23,36 +23,11 @@ dataSecurity:
 auth:
   # Whether to deploy the component
   enabled: true
-  # Credentials to configure and use for managing the authentication server
-  adminUser: discover-auth
-  adminPassword: discover-auth
-  # Realm in the authentication server to configure and use
-  realm: discover
-  # Frontend administrator user to create as part of system initialization
-  createAdminUsername: admin
-  createAdminPassword: admin
-  # Client and client credentials to configure and use for API requests
-  apiClient: discover_api
-  apiClientSecret: d0e76ad7-7d6b-4d86-be3a-5dfe715dbf87
-  # Client to configure and use for logging into the UI
-  uiClient: discover_ui
-  # Expiry time in seconds for login tokens
-  tokenExpiryTimeSeconds: 600
-  external:
-    # Path on the Kubernetes server to make the Keycloak API and admin UI accessible from
-    path: /auth/
-    # External port used to access the Keycloak Admin Console
-    adminPort: 30020
-  # PostgreSQL database server storing authentication server configuration
-  db:
-    # Credentials to configure and use for access
-    username: discover
-    password: discover
-    # Name of the database
-    database: discover-auth
-    # Maximum database size
-    dataVolumeSize: 1Gi
 
+  external:
+    host: *external-host
+    port: *external-port
+  
 # Storage for application data
 entity:
   # IDOL Content database backend

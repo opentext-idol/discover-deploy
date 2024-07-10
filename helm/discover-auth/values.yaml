@@ -1,0 +1,83 @@
+# BEGIN COPYRIGHT NOTICE
+# Copyright 2023-2024 Open Text.
+# 
+# The only warranties for products and services of Open Text and its affiliates and licensors
+# ("Open Text") are as may be set forth in the express warranty statements accompanying such
+# products and services. Nothing herein should be construed as constituting an additional warranty.
+# Open Text shall not be liable for technical or editorial errors or omissions contained herein.
+# The information contained herein is subject to change without notice.
+#
+# END COPYRIGHT NOTICE
+
+global:
+  # -- Global secrets used to pull container images
+  imagePullSecrets:
+  - "dockerhub-secret"
+
+external:
+  # -- external ingress protocol
+  protocol: http
+  # -- external ingress host 
+  # Hostname by which Keycloak expects to be called 
+  # See also https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-rules).
+  host: localhost
+  # -- external ingress port
+  port: 80
+  # -- Host for Keycloak admin (see https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-rules).
+  # If no value is provided then Keycloak admin console is not exposed through ingress
+  adminHost: ""
+  # -- ingress path to expose Keycloak API from (must end with /)
+  path: /auth/
+
+image:
+  # -- used to construct container image name: {registry}/{image}:{version}
+  registry: "microfocusidolserver"
+  # -- used to construct container image name: {registry}/{repo}:{version}
+  repo: solutions-auth-service
+  # -- used to construct container image name: {registry}/{image}:{version}
+  version: "24.3.0"
+  # -- used to determine whether to pull the specified image (see https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
+  pullPolicy: IfNotPresent
+
+# -- statefulset name
+name: &name auth
+# -- statefulset replicas
+replicas: 1
+# -- configmap name 
+config: auth-config
+# -- secret name holding keycloak credentials
+secret: auth-secret
+# -- KEYCLOAK_ADMIN_USER value
+adminUser: discover-auth
+# -- KEYCLOAK_ADMIN_PASSWORD value
+adminPassword: discover-auth
+  
+service:
+  # -- service name
+  name: *name
+  # -- service port
+  port: 8080
+
+# -- PostgreSQL database server storing authentication server configuration
+# @default -- See subvalues
+db:
+  # -- postgres version
+  version: "16.1"
+  # -- db configmap name
+  config: auth-db-config
+  # -- db credentials
+  username: discover
+  # -- db credentials
+  password: discover
+  # -- db name
+  database: discover-auth
+  # -- pv name
+  dataVolume: auth-db-data
+  # -- pvc name
+  dataVolumeClaim: auth-db-data
+  # -- max db size
+  dataVolumeSize: 1Gi
+  # -- storage class for db
+  dataVolumeStorageClass: standard
+
+

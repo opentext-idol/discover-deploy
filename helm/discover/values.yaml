@@ -1,3 +1,7 @@
+global:
+  imagePullSecrets:
+  - "docker-secret"
+
 licenseServer:
   service:
     name: license-service
@@ -6,9 +10,9 @@ licenseServer:
   port: 20000
 
 external:
-  protocol: http
-  host: localhost
-  port: 80
+  protocol: &external-protocol http
+  host: &external-host localhost
+  port: &external-port 80
 
 secret:
   name: docker-secret
@@ -16,14 +20,14 @@ secret:
 
 docker:
   registry:
-    root: "microfocusidolserver"
+    root:  &docker-registry "microfocusidolserver"
     nameSeparator: "/"
     versionSeparator: ":"
   customRegistry:
     root: "localhost:5000/microfocusidolserver"
     nameSeparator: "/"
     versionSeparator: ":"
-  pullPolicy: IfNotPresent
+  pullPolicy: &docker-pullPolicy IfNotPresent
   versions:
     base: 24.2.0
     api: 24.2.0
@@ -44,42 +48,36 @@ dataSecurity:
   volumeClaim: system-security-data
   volumeSize: 100M
 
+# -- discover-auth subchart values
+# @default -- See also discover-auth chart default values
 auth:
+  # -- whether to deploy discover-auth component
   enabled: true
-  name: auth
-  replicas: 1
-  container: auth-container
-  image: solutions-auth-service
-  config: auth-config
-  secret: auth-secret
-  adminUser: discover-auth
-  adminPassword: discover-auth
+  image:
+    registry: *docker-registry
+    version: 24.2.0
+    pullPolicy: *docker-pullPolicy
+  external:
+    protocol: *external-protocol
+    host: *external-host
+    port: *external-port
+  
+  # N.B. Remaining auth settings are not part of the discover-auth subchart
+
+  # Realm in the authentication server to configure and use
   realm: discover
+  # Frontend administrator user to create as part of system initialization
   createAdminUsername: admin
   createAdminPassword: admin
+  # Client and client credentials to configure and use for API requests
   apiClient: discover_api
   apiClientSecret: d0e76ad7-7d6b-4d86-be3a-5dfe715dbf87
+  # Client to configure and use for logging into the UI
   uiClient: discover_ui
+  # Expiry time in seconds for login tokens
   tokenExpiryTimeSeconds: 600
+  # Roles to populate in keycloak
   baseRealmRoles: user
-  external:
-    # must end with /
-    path: /auth/
-    adminPort: 30020
-  service:
-    name: auth-service
-    port: 8080
-    protocol: http
-    path: /
-  db:
-    config: auth-db-config
-    container: auth-service-db
-    username: discover
-    password: discover
-    database: discover-auth
-    dataVolume: auth-db-data
-    dataVolumeClaim: auth-db-data
-    dataVolumeSize: 1Gi
 
 entity:
   graphName: entities
