@@ -12,7 +12,8 @@ metadata:
 
 spec:
   rules:
-    - http:
+    - host: {{ .Values.external.host | quote }}
+      http:
         paths:
           - path: {{ .Values.discoverUi.external.path }}(.*)
             pathType: Prefix
