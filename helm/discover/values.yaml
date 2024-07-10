@@ -20,7 +20,7 @@ secret:
 
 docker:
   registry:
-    root:  &docker-registry"microfocusidolserver"
+    root:  &docker-registry "microfocusidolserver"
     nameSeparator: "/"
     versionSeparator: ":"
   customRegistry:
