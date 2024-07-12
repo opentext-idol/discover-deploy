@@ -58,6 +58,7 @@ configuration to the hosts that will run Kubernetes components.
 Install the application with your updated configuration using Helm:
 
 ```
+helm dependency update discover
 helm install --values discover/values.user.yaml discover ./discover/
 ```
 

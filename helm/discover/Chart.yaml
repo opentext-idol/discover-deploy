@@ -8,4 +8,5 @@ dependencies:
   - name: discover-auth
     alias: auth
     version: 0.1.0
+    #repository: file://../discover-auth
     repository: https://raw.githubusercontent.com/opentext-idol/discover-deploy/develop/helm

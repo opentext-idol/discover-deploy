@@ -13,12 +13,12 @@ entries:
   discover-auth:
   - apiVersion: v2
     appVersion: 24.3.0
-    created: "2024-06-27T16:32:28.323403567+01:00"
+    created: "2024-07-15T11:22:02.372943802+01:00"
     description: A Basic IDOL Discover Auth deployment
-    digest: d52ec33b10d1daaae8ba1ff14dc40d10fc3987fe479b7574e978e29546450b91
+    digest: 2444a569ac9010b9af121be38acee55685b6a66d35302b4c99af594d990a38df
     name: discover-auth
     type: application
     urls:
     - release/discover-auth-0.1.0.tgz
     version: 0.1.0
-generated: "2024-06-27T16:32:28.322539627+01:00"
+generated: "2024-07-15T11:22:02.370528805+01:00"

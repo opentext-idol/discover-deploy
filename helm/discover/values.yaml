@@ -20,16 +20,16 @@ secret:
 
 docker:
   registry:
-    root:  &docker-registry "microfocusidolserver"
-    nameSeparator: "/"
-    versionSeparator: ":"
+    root: &docker-registry-root "microfocusidolserver"
+    nameSeparator: &docker-registry-nameSeparator "/"
+    versionSeparator: &docker-registry-versionSeparator ":"
   customRegistry:
     root: "localhost:5000/microfocusidolserver"
     nameSeparator: "/"
     versionSeparator: ":"
   pullPolicy: &docker-pullPolicy IfNotPresent
   versions:
-    base: 24.2.0
+    base: &docker-versions-base 24.2.0
     api: 24.2.0
     datasets: 24.2.0
     analysis: 24.2.0
@@ -54,8 +54,11 @@ auth:
   # -- whether to deploy discover-auth component
   enabled: true
   image:
-    registry: *docker-registry
-    version: 24.2.0
+    registry:
+      root: *docker-registry-root
+      nameSeparator: *docker-registry-nameSeparator
+      versionSeparator: *docker-registry-versionSeparator
+    version: *docker-versions-base
     pullPolicy: *docker-pullPolicy
   external:
     protocol: *external-protocol
