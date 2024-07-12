@@ -30,8 +30,11 @@ external:
   path: /auth/
 
 image:
-  # -- used to construct container image name: {registry}/{image}:{version}
-  registry: "microfocusidolserver"
+  # -- used to construct container image name: {registry.root}{registry.nameSeparator}{repo}{registry.versionSeparator}{version}
+  registry:
+    root: "microfocusidolserver"
+    nameSeparator: "/"
+    versionSeparator: ":"
   # -- used to construct container image name: {registry}/{repo}:{version}
   repo: solutions-auth-service
   # -- used to construct container image name: {registry}/{image}:{version}

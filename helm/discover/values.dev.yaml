@@ -1,18 +1,18 @@
 licenseServer:
   ip: "REQUIRED"
 external:
-  host: &external-host 192.168.49.2
+  host: &external-host 192.168.49.2.sslip.io
 secret:
   base64dockerconfigjson: "REQUIRED"
 docker:
   registry:
-    root: "REQUIRED"
-    nameSeparator: ":"
-    versionSeparator: "-"
+    root: &docker-registry-root "REQUIRED"
+    nameSeparator: &docker-registry-nameSeparator ":"
+    versionSeparator: &docker-registry-versionSeparator "-"
   customRegistry:
     root: "192.168.49.1:5000/microfocusidolserver"
   versions:
-    base: 24.3.0-SNAPSHOT
+    base: &docker-versions-base 24.3.0-SNAPSHOT
     api: 24.3.0-SNAPSHOT
     datasets: 24.3.0-SNAPSHOT
     analysis: 24.3.0-SNAPSHOT
@@ -24,7 +24,11 @@ auth:
   external:
     host: *external-host
   image:
-    version: 24.3.0-SNAPSHOT
+    registry:
+      root: *docker-registry-root
+      nameSeparator: *docker-registry-nameSeparator
+      versionSeparator: *docker-registry-versionSeparator
+    version: *docker-versions-base
 dataSecurity:
   customImage: false
 entity:

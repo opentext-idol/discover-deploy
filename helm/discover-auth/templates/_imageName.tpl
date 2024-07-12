@@ -10,8 +10,10 @@
 # END COPYRIGHT NOTICE
 
 {{- define "idolsolutions.auth.image" -}}
-{{- $registry := .registry -}}
+{{- $registry := .registry.root -}}
+{{- $nameSep := .registry.nameSeparator -}}
+{{- $versionSep := .registry.versionSeparator -}}
 {{- $imageName := .repo -}}
 {{- $version := .version -}}
-{{ print  $registry "/" $imageName ":" $version }}
+{{ print  $registry $nameSep $imageName $versionSep $version }}
 {{- end -}}
