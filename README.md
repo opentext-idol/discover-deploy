@@ -85,9 +85,8 @@ ingest documents from an existing IDOL setup, and preserve the IDOL ACL fields, 
    * Set `ISOL_ENTITY_IDOL_SECURITY_MODE` in `config/api.env`.
 3. Provide Security Info Keys (AES keyfile) for the `entity-indexdb` component:
    * See `custom/data-security/custom/README.md`.  This must be the Security Info Keys used by your Community component.
-4. Enable HTTPS communications for the `entity-indexdb` component:
-   * Set `ISOL_ENTITY_INDEXDB_PROTOCOL=http` in `config/base.env`.
-   * Optionally, provide your own TLS certificate: see `custom/data-security/custom/README.md`.
+4. Optionally, provide your own TLS certificate for the `entity-indexdb` component:
+   * See `custom/data-security/custom/README.md`.
 
 ## Further examples
 
