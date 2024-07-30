@@ -3,7 +3,7 @@ name: discover
 description: A Basic IDOL Discover deployment
 type: application
 version: 0.1.0
-appVersion: "24.2.0"
+appVersion: "24.3.0"
 dependencies:
   - name: discover-auth
     alias: auth

@@ -12,13 +12,13 @@ docker:
   customRegistry:
     root: "192.168.49.1:5000/microfocusidolserver"
   versions:
-    base: &docker-versions-base 24.3.0-SNAPSHOT
-    api: 24.3.0-SNAPSHOT
-    datasets: 24.3.0-SNAPSHOT
-    analysis: 24.3.0-SNAPSHOT
-    discoverData: 24.3.0-SNAPSHOT
-    discoverApi: 24.3.0-SNAPSHOT
-    discover: 24.3.0-SNAPSHOT
+    base: &docker-versions-base 24.4.0-SNAPSHOT
+    api: 24.4.0-SNAPSHOT
+    datasets: 24.4.0-SNAPSHOT
+    analysis: 24.4.0-SNAPSHOT
+    discoverData: 24.4.0-SNAPSHOT
+    discoverApi: 24.4.0-SNAPSHOT
+    discover: 24.4.0-SNAPSHOT
 
 auth:
   external:

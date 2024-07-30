@@ -29,13 +29,13 @@ docker:
     versionSeparator: ":"
   pullPolicy: &docker-pullPolicy IfNotPresent
   versions:
-    base: &docker-versions-base 24.2.0
-    api: 24.2.0
-    datasets: 24.2.0
-    analysis: 24.2.0
-    discoverData: 24.2.0
-    discoverApi: 24.2.0
-    discover: 24.2.0
+    base: &docker-versions-base 24.3.0
+    api: 24.3.0
+    datasets: 24.3.0
+    analysis: 24.3.0
+    discoverData: 24.3.0
+    discoverApi: 24.3.0
+    discover: 24.3.0
     postgres: 16.1
 
 dataSecurity:
@@ -64,7 +64,7 @@ auth:
     protocol: *external-protocol
     host: *external-host
     port: *external-port
-  
+
   # N.B. Remaining auth settings are not part of the discover-auth subchart
 
   # Realm in the authentication server to configure and use
