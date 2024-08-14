@@ -179,7 +179,10 @@ def deploy(components, component_paths, options):
     # - don't remove if --skip-deploy, so that data containers persist afterwards
     # - we want to restart if already running, to ensure that data volume changes are picked up; to avoid starting
     #   twice, this line will only create containers
-    run_compose(components, component_paths, options, skip_deploy=True, detach=False, remove=not options.skip_deploy)
+    # run_compose(components, component_paths, options, skip_deploy=True, detach=False, remove=not options.skip_deploy)
+
+    # for the moment never remove, otherwise the data-* containers are removed
+    run_compose(components, component_paths, options, skip_deploy=True, detach=False, remove=False)
     if not options.skip_deploy:
         run_process(get_compose_args(components, component_paths, options, ['restart']))
 
