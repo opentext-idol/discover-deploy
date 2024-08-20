@@ -192,7 +192,7 @@ def main():
     component_paths = get_component_paths(program_args)
 
     if program_args.component:
-        run_compose(['data-entity', 'data-security'], component_paths, program_args,
+        run_compose(['data-entity', 'data-security', 'data-entity-vector'], component_paths, program_args,
                     skip_deploy=program_args.skip_deploy, detach=False, remove=False, log_level='error')
         components = program_args.component
         validate_components(components, component_paths)

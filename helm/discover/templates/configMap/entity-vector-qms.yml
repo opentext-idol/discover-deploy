@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.entity.vector.qms.config }}
+data:
+  ISOL_LICENSE_SERVER_HOST: "{{ .Values.licenseServer.service.name}}"
+  ISOL_LICENSE_SERVER_PORT: "{{ .Values.licenseServer.service.port }}"
+  ISOL_ENTITY_INDEXDB_HOST: "{{ .Values.entity.index.service.name }}"
+  ISOL_ENTITY_INDEXDB_ACI_PORT: "{{ .Values.entity.index.service.queryPort }}"

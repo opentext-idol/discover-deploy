@@ -125,6 +125,21 @@ entity:
     ingress:
       enabled: false
       path: /content/
+  vector:
+    qms:
+      enabled: true
+      name: entity-vector-qms
+      replicas: 2
+      container: entity-vector-qms-container
+      image: solutions-entity-vector-qms
+      config: entity-vector-qms-config
+      service:
+        name: entity-vector-qms-service
+        protocol: https
+        aciPort: 16000
+      ingress:
+        enabled: false
+        path: /entity-vector-qms/
 
 filestore:
   name: filestore

@@ -45,8 +45,27 @@ services:
       - MAX_HEAP_SIZE=${ISOL_ENTITY_STORAGEDB_MAX_HEAP_SIZE}
       - HEAP_NEWSIZE=${ISOL_ENTITY_STORAGEDB_HEAP_NEWSIZE}
 
+  entity-vector-qms:
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-vector-qms${ISOL_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
+    networks:
+      - main
+    volumes:
+      - security-data:/data/security
+      - entity-vector-data:/data/entity-vector
+      - entity-vector-qms-license-data:/qms/license-cache
+    ports:
+      - ${ISOL_ENTITY_VECTOR_QMS_ACI_DOCKER_PORT}:16000
+    mac_address: 06-00-00-18-00-01
+    environment:
+      - ISOL_LICENSE_SERVER_HOST=${ISOL_LICENSE_SERVER_HOST}
+      - ISOL_LICENSE_SERVER_PORT=${ISOL_LICENSE_SERVER_PORT}
+      - ISOL_ENTITY_INDEXDB_HOST=${ISOL_ENTITY_INDEXDB_HOST}
+      - ISOL_ENTITY_INDEXDB_ACI_PORT=${ISOL_ENTITY_INDEXDB_ACI_PORT}
+
 volumes:
   security-data:
+  entity-vector-data:
   entity-storagedb-data:
   entity-indexdb-data:
   entity-indexdb-license-data:
+  entity-vector-qms-license-data:

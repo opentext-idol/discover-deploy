@@ -35,6 +35,9 @@ entity:
   storage:
     maxHeapSize: 500M
     heapNewSize: 100M
+  vector:
+    qms:
+      replicas: 1
 filestore:
   dataVolumeSize: 10Gi
 analysis:

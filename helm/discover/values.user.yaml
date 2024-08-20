@@ -53,6 +53,12 @@ entity:
     # Memory tuning - refer to Cassandra documentation
     maxHeapSize: 2G
     heapNewSize: 500M
+  vector:
+    qms:
+      enabled: true
+      replicas: 2
+      service:
+        protocol: https
 
 # Amazon S3-compatible object storage for files
 filestore:

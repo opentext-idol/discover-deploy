@@ -1,0 +1,50 @@
+{{- if .Values.entity.vector.qms.enabled -}}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.entity.vector.qms.name }}
+
+spec:
+  replicas: {{ .Values.entity.vector.qms.replicas }}
+  selector:
+    matchLabels:
+      component: {{ .Values.entity.vector.qms.name }}
+  serviceName: {{ .Values.entity.vector.qms.name }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.entity.vector.qms.name }}
+
+    spec:
+      containers:
+        - name:  {{ .Values.entity.vector.qms.container }}
+{{ include "image" (dict
+  "Values" .Values
+  "imageName" .Values.entity.vector.qms.image
+  "version" .Values.docker.versions.api
+  ) | indent 10 }}
+          imagePullPolicy: {{ .Values.docker.pullPolicy }}
+          ports:
+            - containerPort: 16000
+          envFrom:
+            - configMapRef:
+                name:  {{ .Values.entity.vector.qms.config }}
+      imagePullSecrets:
+        - name: {{ .Values.secret.name }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.entity.vector.qms.service.name }}
+
+spec:
+  type: ClusterIP
+  selector:
+    component: {{ .Values.entity.vector.qms.name }}
+  ports:
+    - name: query
+      port: {{ .Values.entity.vector.qms.service.aciPort }}
+      targetPort: 16000
+{{- end -}}
