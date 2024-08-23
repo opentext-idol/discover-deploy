@@ -14,19 +14,19 @@
 
 services:
 
-  app-data-base:
-    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-app-data-base${ISOL_DOCKER_VERSION_SEP}${ISOL_BASE_VERSION}
+  data-entity-vector:
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-data-entity-vector${ISOL_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
     # create a container but don't do anything, so the container is available to list to discover all required images
     entrypoint: "true"
     networks:
       - main
 
-  data-entity-vector:
-    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-data-entity-vector${ISOL_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
+  data-entity-vector-custom:
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-data-entity-vector-custom${ISOL_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
     build:
       context: ../custom/data-entity-vector
       args:
-        BASE_IMAGE: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-app-data-base${ISOL_DOCKER_VERSION_SEP}${ISOL_BASE_VERSION}
+        BASE_IMAGE: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-data-entity-vector${ISOL_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
     networks:
       - main
     volumes:

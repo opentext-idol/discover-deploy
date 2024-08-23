@@ -19,6 +19,9 @@ docker:
 dataSecurity:
   customImage: false
 
+dataEntityVector:
+  customImage: false
+
 # Keycloak authentication server
 auth:
   # Whether to deploy the component
@@ -55,7 +58,7 @@ entity:
     heapNewSize: 500M
   vector:
     qms:
-      enabled: true
+      enabled: false
       replicas: 2
       service:
         protocol: https

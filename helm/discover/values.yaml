@@ -127,7 +127,7 @@ entity:
       path: /content/
   vector:
     qms:
-      enabled: true
+      enabled: false
       name: entity-vector-qms
       replicas: 2
       container: entity-vector-qms-container
@@ -291,6 +291,15 @@ dataEntity:
   image: solutions-discover-data-entity
   volume: system-entity-data
   volumeClaim: system-entity-data
+  volumeSize: 100M
+
+dataEntityVector:
+  name: data-entity-vector
+  container: data-entity-vector
+  customImage: false
+  image: solutions-discover-data-entity-vector
+  volume: system-entity-vector-data
+  volumeClaim: system-entity-vector-data
   volumeSize: 100M
 
 discoverUi:

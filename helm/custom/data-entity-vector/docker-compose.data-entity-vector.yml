@@ -14,9 +14,9 @@
 
 services:
 
-  data-entity-vector:
-    image: ${CUSTOM_DOCKER_REGISTRY}${CUSTOM_DOCKER_NAME_SEP}solutions-app-data-base${CUSTOM_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
+  data-entity-vector-custom:
+    image: ${CUSTOM_DOCKER_REGISTRY}${CUSTOM_DOCKER_NAME_SEP}solutions-data-entity-vector-custom${CUSTOM_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
     build:
       context: .
       args:
-        BASE_IMAGE: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-app-data-base${ISOL_DOCKER_VERSION_SEP}${ISOL_BASE_VERSION}
+        BASE_IMAGE: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-data-entity-vector${ISOL_DOCKER_VERSION_SEP}${ISOL_API_VERSION}

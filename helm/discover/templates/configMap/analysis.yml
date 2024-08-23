@@ -18,6 +18,10 @@ data:
   ISOL_ENTITY_INDEXDB_COMMUNITY_PROTOCOL: "{{ .Values.entity.index.community.protocol }}"
   ISOL_ENTITY_INDEXDB_COMMUNITY_HOST: "{{ .Values.entity.index.community.host }}"
   ISOL_ENTITY_INDEXDB_COMMUNITY_ACI_PORT: "{{ .Values.entity.index.community.aciPort }}"
+  ISOL_ENTITY_VECTOR_QMS_PROTOCOL: "{{ .Values.entity.vector.qms.service.protocol }}"
+  ISOL_ENTITY_VECTOR_QMS_HOST: "{{ .Values.entity.vector.qms.service.name }}"
+  ISOL_ENTITY_VECTOR_QMS_ACI_PORT: "{{ .Values.entity.vector.qms.service.aciPort }}"
+
   ISOL_SECURITY_DATA_VOLUME_PATH: "/data/security"
   ISOL_ENTITY_DATA_VOLUME_PATH: "/data/entity"
   ISOL_ENTITY_IDOL_SECURITY_TYPE: "{{ .Values.api.idolSecurity.type }}"

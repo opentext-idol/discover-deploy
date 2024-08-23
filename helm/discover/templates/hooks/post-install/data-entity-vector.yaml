@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Values.dataEntityVector.name }}"
+  annotations:
+    "helm.sh/hook": post-install, post-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.dataEntityVector.name }}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: {{ .Values.dataEntityVector.container }}
+{{ include "image" (dict
+  "Values" .Values
+  "imageName" .Values.dataEntityVector.image
+  "version" .Values.docker.versions.api
+  "custom" .Values.dataEntityVector.customImage
+  ) | indent 10 }}
+          imagePullPolicy: {{ .Values.docker.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.dataEntityVector.config }}
+          volumeMounts:
+            - name: {{ .Values.dataEntityVector.volume }}
+              mountPath: /target-volume
+
+      volumes:
+        - name: {{ .Values.dataEntityVector.volume }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataEntityVector.volumeClaim }}
+
+      imagePullSecrets:
+        - name: {{ .Values.secret.name }}
