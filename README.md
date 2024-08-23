@@ -27,7 +27,7 @@ Run the `deploy.py` tool using Python.  (Much like when running `docker`, you
 may have to run it as a different user with sufficient permissions to manage Docker containers.)
 
 ```
-python3 deploy.py auth entity filestore analysis audit dataset-locations api ui
+python3 deploy.py auth entity entity-vector filestore analysis audit dataset-locations api ui
 ```
 
 With the default configuration, the Discover UI will be available at `https://localhost:8090` once the
@@ -93,7 +93,7 @@ ingest documents from an existing IDOL setup, and preserve the IDOL ACL fields, 
 To use HTTP instead of HTTPS, for testing purposes only, run:
 
 ```
-python3 deploy.py --disable-encryption auth entity filestore analysis audit dataset-locations api ui
+python3 deploy.py --disable-encryption auth entity entity-vector filestore analysis audit dataset-locations api ui
 ```
 
 > note: changes to the encryption state of a deployed system require manual deletion of the realm in Keycloak before running `deploy.py` with the new state.
@@ -129,7 +129,7 @@ while others listen on 127.0.0.1 only):
 | entity            | 8021     | no         | ACI port of IDOL Content database backend for the Gremlin database         |
 | entity            | 8022     | no         | Index port of IDOL Content database backend for the Gremlin database       |
 | entity            | 8023     | no         | CQL port of Cassandra-compatible database backend for the Gremlin database |
-| entity            | 8024     | no         | ACI port of IDOL QMS used for vector search                                |
+| entity-vector     | 8024     | no         | ACI port of IDOL QMS used for vector search                                |
 | filestore         | 8030     | no         | S3-compatible object storage                                               |
 | analysis          | 8040     | no         | NiFi server for media analysis (API and admin UI)                          |
 | audit             | 8050     | no         | PostgreSQL database storing audit logs                                     |
@@ -146,11 +146,12 @@ Docker volumes are created with the prefix `opentext-idol-discover_`, which can 
 | entity            | entity-storagedb-data          | Application data                    |
 | entity            | entity-indexdb-data            | Search index for application data   |
 | entity            | entity-indexdb-license-data    | Cache for license information       |
-| entity            | entity-vector-qms-license-data | Cache for license information       |
+| entity-vector     | entity-vector-qms-license-data | Cache for license information       |
 | filestore         | filestore-service-data         | Uploaded and generated files        |
 | audit             | audit-db-data                  | Audit logs                          |
 | dataset-locations | dataset-locations-license-data | Cache for license information       |
 | -                 | entity-data                    | Schema for application data         |
+| -                 | entity-vector-data             | Configuration for vector search     |
 | -                 | security-data                  | Security-related data               |
 
 All containers connect to a Docker network called `opentext-idol-discover_main`.  The
