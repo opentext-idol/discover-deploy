@@ -56,9 +56,12 @@ entity:
     # Memory tuning - refer to Cassandra documentation
     maxHeapSize: 2G
     heapNewSize: 500M
+  # Components required for vector search
   vector:
     qms:
+      # Whether to deploy the component
       enabled: false
+      # Target number of instances to keep running
       replicas: 2
       service:
         protocol: https
