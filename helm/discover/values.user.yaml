@@ -16,6 +16,13 @@ docker:
   customRegistry:
     root: "localhost:5000/microfocusidolserver"
 
+# HTTP proxy settings for requests made by backend components
+# This is only used by the entity.vector.qms component
+proxy:
+  httpProxy:
+  httpsProxy:
+  noProxy:
+
 dataSecurity:
   customImage: false
 

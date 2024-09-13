@@ -30,6 +30,9 @@ services:
       - ISOL_LICENSE_SERVER_PORT=${ISOL_LICENSE_SERVER_PORT}
       - ISOL_ENTITY_INDEXDB_HOST=${ISOL_ENTITY_INDEXDB_HOST}
       - ISOL_ENTITY_INDEXDB_ACI_PORT=${ISOL_ENTITY_INDEXDB_ACI_PORT}
+      - http_proxy=${ISOL_HTTP_PROXY}
+      - https_proxy=${ISOL_HTTPS_PROXY}
+      - no_proxy=${ISOL_NO_PROXY}
 
 volumes:
   security-data:

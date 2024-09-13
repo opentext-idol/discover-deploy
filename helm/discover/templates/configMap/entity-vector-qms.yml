@@ -7,3 +7,6 @@ data:
   ISOL_LICENSE_SERVER_PORT: "{{ .Values.licenseServer.service.port }}"
   ISOL_ENTITY_INDEXDB_HOST: "{{ .Values.entity.index.service.name }}"
   ISOL_ENTITY_INDEXDB_ACI_PORT: "{{ .Values.entity.index.service.queryPort }}"
+  http_proxy: "{{ .Values.proxy.httpProxy }}"
+  https_proxy: "{{ .Values.proxy.httpsProxy }}"
+  no_proxy: "{{ .Values.proxy.noProxy }}"
