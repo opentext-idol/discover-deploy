@@ -54,3 +54,12 @@ spec:
                 port:
                   number: {{ .Values.entity.index.service.queryPort }}
           {{- end }}
+          {{- if .Values.entity.vector.qms.ingress.enabled }}
+          - path: {{ .Values.entity.vector.qms.ingress.path }}(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.entity.vector.qms.service.name }}
+                port:
+                  number: {{ .Values.entity.vector.qms.service.aciPort }}
+          {{- end }}

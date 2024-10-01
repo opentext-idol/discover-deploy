@@ -36,6 +36,8 @@ spec:
               mountPath: /data/security
             - name: {{ .Values.dataEntity.volume }}
               mountPath: /data/entity
+            - name: {{ .Values.dataEntityVector.volume }}
+              mountPath: /data/entity-vector
           startupProbe:
 {{ include "probe.nifi" . | indent 12 }}
             initialDelaySeconds: 30
@@ -55,6 +57,9 @@ spec:
         - name: {{ .Values.dataEntity.volume }}
           persistentVolumeClaim:
             claimName: {{ .Values.dataEntity.volumeClaim }}
+        - name: {{ .Values.dataEntityVector.volume }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataEntityVector.volumeClaim }}
       imagePullSecrets:
         - name: {{ .Values.secret.name }}
 ---

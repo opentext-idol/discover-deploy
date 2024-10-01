@@ -38,6 +38,11 @@ docker:
     discover: 24.3.0
     postgres: 16.1
 
+proxy:
+  httpProxy:
+  httpsProxy:
+  noProxy:
+
 dataSecurity:
   name: data-security
   container: data-security
@@ -125,6 +130,21 @@ entity:
     ingress:
       enabled: false
       path: /content/
+  vector:
+    qms:
+      enabled: false
+      name: entity-vector-qms
+      replicas: 2
+      container: entity-vector-qms-container
+      image: solutions-entity-vector-qms
+      config: entity-vector-qms-config
+      service:
+        name: entity-vector-qms-service
+        protocol: https
+        aciPort: 16000
+      ingress:
+        enabled: false
+        path: /entity-vector-qms/
 
 filestore:
   name: filestore
@@ -276,6 +296,15 @@ dataEntity:
   image: solutions-discover-data-entity
   volume: system-entity-data
   volumeClaim: system-entity-data
+  volumeSize: 100M
+
+dataEntityVector:
+  name: data-entity-vector
+  container: data-entity-vector
+  customImage: false
+  image: solutions-discover-data-entity-vector
+  volume: system-entity-vector-data
+  volumeClaim: system-entity-vector-data
   volumeSize: 100M
 
 discoverUi:

@@ -1,0 +1,40 @@
+#
+# Copyright 2021-2023 Open Text.
+#
+# Licensed under the MIT License (the "License"); you may not use this file
+# except in compliance with the License.
+#
+# The only warranties for products and services of Open Text and its affiliates
+# and licensors ("Open Text") are as may be set forth in the express warranty
+# statements accompanying such products and services. Nothing herein should be
+# construed as constituting an additional warranty. Open Text shall not be
+# liable for technical or editorial errors or omissions contained herein. The
+# information contained herein is subject to change without notice.
+#
+
+services:
+
+  entity-vector-qms:
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-entity-vector-qms${ISOL_DOCKER_VERSION_SEP}${ISOL_API_VERSION}
+    networks:
+      - main
+    volumes:
+      - security-data:/data/security
+      - entity-vector-data:/data/entity-vector
+      - entity-vector-qms-license-data:/qms/license-cache
+    ports:
+      - ${ISOL_ENTITY_VECTOR_QMS_ACI_DOCKER_PORT}:16000
+    mac_address: 06-00-00-18-00-01
+    environment:
+      - ISOL_LICENSE_SERVER_HOST=${ISOL_LICENSE_SERVER_HOST}
+      - ISOL_LICENSE_SERVER_PORT=${ISOL_LICENSE_SERVER_PORT}
+      - ISOL_ENTITY_INDEXDB_HOST=${ISOL_ENTITY_INDEXDB_HOST}
+      - ISOL_ENTITY_INDEXDB_ACI_PORT=${ISOL_ENTITY_INDEXDB_ACI_PORT}
+      - http_proxy=${ISOL_HTTP_PROXY}
+      - https_proxy=${ISOL_HTTPS_PROXY}
+      - no_proxy=${ISOL_NO_PROXY}
+
+volumes:
+  security-data:
+  entity-vector-data:
+  entity-vector-qms-license-data:

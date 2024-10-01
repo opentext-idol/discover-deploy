@@ -16,7 +16,17 @@ docker:
   customRegistry:
     root: "localhost:5000/microfocusidolserver"
 
+# HTTP proxy settings for requests made by backend components
+# This is only used by the entity.vector.qms component
+proxy:
+  httpProxy:
+  httpsProxy:
+  noProxy:
+
 dataSecurity:
+  customImage: false
+
+dataEntityVector:
   customImage: false
 
 # Keycloak authentication server
@@ -53,6 +63,15 @@ entity:
     # Memory tuning - refer to Cassandra documentation
     maxHeapSize: 2G
     heapNewSize: 500M
+  # Components required for vector search
+  vector:
+    qms:
+      # Whether to deploy the component
+      enabled: false
+      # Target number of instances to keep running
+      replicas: 2
+      service:
+        protocol: https
 
 # Amazon S3-compatible object storage for files
 filestore:
