@@ -1,0 +1,36 @@
+#
+# Copyright 2021-2024 Open Text.
+#
+# The only warranties for products and services of Open Text and its
+# affiliates and licensors ("Open Text") are as may be set forth in the
+# express warranty statements accompanying such products and services.
+# Nothing herein should be construed as constituting an additional
+# warranty. Open Text shall not be liable for technical or editorial
+# errors or omissions contained herein. The information contained herein
+# is subject to change without notice.
+#
+# Except as specifically indicated otherwise, this document contains
+# confidential information and a valid license is required for possession,
+# use or copying. If this work is provided to the U.S. Government,
+# consistent with FAR 12.211 and 12.212, Commercial Computer Software,
+# Computer Software Documentation, and Technical Data for Commercial Items
+# are licensed to the U.S. Government under vendor's standard commercial
+# license.
+#
+
+services:
+
+  reverse-proxy:
+    image: ${ISOL_DOCKER_REGISTRY}${ISOL_DOCKER_NAME_SEP}solutions-reverse-proxy${ISOL_DOCKER_VERSION_SEP}${ISOL_BASE_VERSION}
+    networks:
+      - main
+    ports:
+      - ${ISOL_REVERSE_PROXY_DOCKER_PORT}:80
+    environment:
+      - SERVER_NAME=${ISOL_REVERSE_PROXY_SERVER_NAME}
+      - BASE_PATH=${ISOL_REVERSE_PROXY_BASE_PATH}
+      - COMPONENTS=${ISOL_REVERSE_PROXY_COMPONENTS}
+      - MAX_REQUEST_BODY_BYTES=${ISOL_REVERSE_PROXY_MAX_REQUEST_BODY_BYTES}
+
+networks:
+  main:
