@@ -22,9 +22,6 @@ spec:
   "custom" .Values.dataEntityVector.customImage
   ) | indent 10 }}
           imagePullPolicy: {{ .Values.docker.pullPolicy }}
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.dataEntityVector.config }}
           volumeMounts:
             - name: {{ .Values.dataEntityVector.volume }}
               mountPath: /target-volume
