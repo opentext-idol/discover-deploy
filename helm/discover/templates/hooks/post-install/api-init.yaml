@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Values.api.init.name }}"
+  annotations:
+    "helm.sh/hook": post-install, post-upgrade
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.api.init.name }}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: {{ .Values.api.init.container }}
+{{ include "image" (dict
+  "Values" .Values
+  "imageName" .Values.api.image
+  "version" .Values.docker.versions.discoverApi
+  ) | indent 10 }}
+          imagePullPolicy: {{ .Values.docker.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.api.secret }}
+            - configMapRef:
+                name: {{ .Values.api.config }}
+            - configMapRef:
+                name: {{ .Values.api.init.config }}
+          volumeMounts:
+            - name: {{ .Values.dataSecurity.volume }}
+              mountPath: /data/security
+            - name: {{ .Values.dataEntity.volume }}
+              mountPath: /data/entity
+            - name: {{ .Values.dataEntityVector.volume }}
+              mountPath: /data/entity-vector
+
+      volumes:
+        - name: {{ .Values.dataSecurity.volume }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataSecurity.volumeClaim }}
+        - name: {{ .Values.dataEntity.volume }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataEntity.volumeClaim }}
+        - name: {{ .Values.dataEntityVector.volume }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataEntityVector.volumeClaim }}
+
+      imagePullSecrets:
+        - name: {{ .Values.secret.name }}

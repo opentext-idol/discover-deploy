@@ -58,9 +58,9 @@ data:
   ISOL_API_SERVICE_APPLICATION_TYPE: "{{ .Values.api.applicationType }}"
   ISOL_API_SERVICE_ALLOWED_ORIGINS:  "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}"
   ISOL_API_SERVICE_BASE_URL: "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}{{ .Values.api.external.path }}"
-  ISOL_API_SERVICE_API_ENABLED: "{{ .Values.api.apiEnabled }}"
-  ISOL_API_SERVICE_INIT_ENABLED: "{{ .Values.api.initEnabled }}"
-  ISOL_API_SERVICE_SCHEDULE_ENABLED: "{{ .Values.api.scheduleEnabled }}"
+  ISOL_API_SERVICE_API_ENABLED: "true"
+  ISOL_API_SERVICE_INIT_ENABLED: "false"
+  ISOL_API_SERVICE_SCHEDULE_ENABLED: "false"
 
   ISOL_STATS_MIN_ANALYSIS_JOB_EVENT_AGE_SECONDS: "{{ .Values.api.stats.minAnalysisJobAgeSeconds }}"
   ISOL_API_SERVICE_INTERNAL_PORT: "{{ .Values.api.internalPort }}"

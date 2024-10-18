@@ -1,0 +1,53 @@
+{{- if .Values.api.schedule.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.api.schedule.name }}
+
+spec:
+  replicas: {{ .Values.api.schedule.replicas }}
+  selector:
+    matchLabels:
+      component:  {{ .Values.api.schedule.name }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.api.schedule.name }}
+    spec:
+      containers:
+        - name: {{ .Values.api.schedule.container }}
+{{ include "image" (dict
+  "Values" .Values
+  "imageName" .Values.api.image
+  "version" .Values.docker.versions.discoverApi
+  ) | indent 10 }}
+          imagePullPolicy: {{ .Values.docker.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.api.secret }}
+            - configMapRef:
+                name: {{ .Values.api.config }}
+            - configMapRef:
+                name: {{ .Values.api.schedule.config }}
+          volumeMounts:
+            - name: {{ .Values.dataSecurity.volume }}
+              mountPath: /data/security
+            - name: {{ .Values.dataEntity.volume }}
+              mountPath: /data/entity
+            - name: {{ .Values.dataEntityVector.volume }}
+              mountPath: /data/entity-vector
+
+      volumes:
+        - name: {{ .Values.dataSecurity.volume }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataSecurity.volumeClaim }}
+        - name: {{ .Values.dataEntity.volume }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataEntity.volumeClaim }}
+        - name: {{ .Values.dataEntityVector.volume }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataEntityVector.volumeClaim }}
+
+      imagePullSecrets:
+        - name: {{ .Values.secret.name }}
+{{- end -}}
