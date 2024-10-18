@@ -32,7 +32,7 @@ services:
     volumes:
       - security-data:/target-volume
     environment:
-      - ISOL_SECURITY_TLS=entity-indexdb ${ISOL_ENTITY_INDEXDB_HOST} ${ISOL_ENTITY_INDEXDB_SAN},entity-vector-qms ${ISOL_ENTITY_VECTOR_QMS_HOST} ${ISOL_ENTITY_VECTOR_QMS_SAN}
+      - ISOL_SECURITY_TLS=entity-indexdb ${ISOL_ENTITY_INDEXDB_HOST} ${ISOL_ENTITY_INDEXDB_INDEX_HOST} ${ISOL_ENTITY_INDEXDB_SAN},entity-vector-qms ${ISOL_ENTITY_VECTOR_QMS_HOST} ${ISOL_ENTITY_VECTOR_QMS_SAN}
       - ISOL_SECURITY_SECURITYINFO=entity-indexdb
 
 volumes:
