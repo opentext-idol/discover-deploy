@@ -254,7 +254,7 @@ datasets:
 api:
   enabled: true
   name: api
-  replicas: 1
+  replicas: 2
   container: api-container
   internalPort: 8080
   image: solutions-discover-api-service
@@ -264,9 +264,6 @@ api:
     configName: api-config-files
     volumeName: api-config-files
   applicationType: discover
-  apiEnabled: true
-  initEnabled: true
-  scheduleEnabled: true
   external:
     path: /api/
   expiry:
@@ -289,6 +286,16 @@ api:
   service:
     name: api-service
     port: 8080
+  init:
+    name: api-init
+    container: api-init
+    config: api-init-config
+  schedule:
+    enabled: true
+    name: api-schedule
+    replicas: 1
+    container: api-schedule
+    config: api-schedule-config
 
 dataEntity:
   name: data-entity

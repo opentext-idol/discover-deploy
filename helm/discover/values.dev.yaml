@@ -50,5 +50,7 @@ analysis:
 datasets:
   locations:
     replicas: 1
+api:
+  replicas: 1
 discoverUi:
   replicas: 1

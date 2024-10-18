@@ -167,6 +167,8 @@ api:
     aclFormat: "<E=B!>:U:<U=SLE+>:G:<G=SLE+>:NU:<NU=SLE->:NG:<NG=SLE->"
     aclCheck: "NU=[DU]?F:-,NG=[DG]?F:-,E=1?P:-,U=[DU]?P:-,G=[DG]?P:F"
     type: Generic_V4
+  schedule:
+    enabled: true
 
 
 # Discover user interface
