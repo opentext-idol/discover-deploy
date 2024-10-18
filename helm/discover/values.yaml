@@ -309,7 +309,7 @@ dataEntityVector:
   name: data-entity-vector
   container: data-entity-vector
   customImage: false
-  image: solutions-discover-data-entity-vector
+  image: solutions-data-entity-vector
   volume: system-entity-vector-data
   volumeClaim: system-entity-vector-data
   volumeSize: 100M
