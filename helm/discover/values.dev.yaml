@@ -52,5 +52,7 @@ datasets:
     replicas: 1
 api:
   replicas: 1
+dataEntityVector:
+  customImage: false
 discoverUi:
   replicas: 1
