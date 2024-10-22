@@ -1,7 +1,8 @@
 licenseServer:
   ip: "REQUIRED"
 external:
-  host: &external-host 192.168.49.2.sslip.io
+  host: &external-host discover.192.168.49.2.nip.io
+  adminHost: &external-adminHost discoveradmin.192.168.49.2.nip.io
 secret:
   base64dockerconfigjson: "REQUIRED"
 docker:
@@ -12,17 +13,18 @@ docker:
   customRegistry:
     root: "192.168.49.1:5000/microfocusidolserver"
   versions:
-    base: &docker-versions-base 24.4.0-SNAPSHOT
-    api: 24.4.0-SNAPSHOT
-    datasets: 24.4.0-SNAPSHOT
-    analysis: 24.4.0-SNAPSHOT
-    discoverData: 24.4.0-SNAPSHOT
-    discoverApi: 24.4.0-SNAPSHOT
-    discover: 24.4.0-SNAPSHOT
+    base: &docker-versions-base 25.1.0-SNAPSHOT
+    api: 25.1.0-SNAPSHOT
+    datasets: 25.1.0-SNAPSHOT
+    analysis: 25.1.0-SNAPSHOT
+    discoverData: 25.1.0-SNAPSHOT
+    discoverApi: 25.1.0-SNAPSHOT
+    discover: 25.1.0-SNAPSHOT
 
 auth:
   external:
     host: *external-host
+    adminHost: *external-adminHost
   image:
     registry:
       root: *docker-registry-root
