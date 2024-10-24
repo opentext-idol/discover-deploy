@@ -56,6 +56,7 @@ data:
   ISOL_AUDIT_PORT: "{{ .Values.audit.service.port }}"
   ISOL_AUDIT_DATABASE_NAME: "{{ .Values.audit.database }}"
 
+  ISOL_API_SERVICE_JAVA_OPTS: {{ if .Values.api.process.maxMemory -}} -Xmx{{ .Values.api.process.maxMemory }} {{- end }}
   ISOL_API_SERVICE_APPLICATION_TYPE: "{{ .Values.api.applicationType }}"
   ISOL_API_SERVICE_ALLOWED_ORIGINS:  "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}"
   ISOL_API_SERVICE_BASE_URL: "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}{{ .Values.api.external.path }}"

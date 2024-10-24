@@ -11,6 +11,9 @@ licenseServer:
 external:
   host: &external-host localhost
   port: &external-port 80
+  # The address of the server running Kubernetes, for accessing administrator tools.  If empty, administrator tools are
+  # not exposed.
+  adminHost: &external-adminHost ""
 
 docker:
   customRegistry:
@@ -37,7 +40,8 @@ auth:
   external:
     host: *external-host
     port: *external-port
-  
+    adminHost: *external-adminHost
+
 # Storage for application data
 entity:
   # IDOL Content database backend

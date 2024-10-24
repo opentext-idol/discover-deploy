@@ -1,0 +1,48 @@
+{{- if .Values.external.adminHost -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: isol-ingress-admin
+  annotations:
+    nginx.org/mergeable-ingress-type: master
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-Host $host;
+
+spec:
+  rules:
+    - host: {{ .Values.external.adminHost | quote }}
+      http:
+        paths:
+          - path: /nifi-api(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.analysis.service.name }}
+                port:
+                  number: {{ .Values.analysis.service.port }}
+          - path: {{ .Values.analysis.ingress.path }}(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.analysis.service.name }}
+                port:
+                  number: {{ .Values.analysis.service.port }}
+          - path: {{ .Values.entity.index.ingress.path }}(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.entity.index.service.name }}
+                port:
+                  number: {{ .Values.entity.index.service.queryPort }}
+          - path: {{ .Values.entity.vector.qms.ingress.path }}(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.entity.vector.qms.service.name }}
+                port:
+                  number: {{ .Values.entity.vector.qms.service.aciPort }}
+{{- end -}}
