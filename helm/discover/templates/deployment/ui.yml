@@ -27,18 +27,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Values.discoverUi.config }}
-          startupProbe:
-{{ include "probe.discover" . | indent 12 }}
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            failureThreshold: 30
           readinessProbe:
 {{ include "probe.discover" . | indent 12 }}
             failureThreshold: 2
           livenessProbe:
 {{ include "probe.discover" . | indent 12 }}
-            periodSeconds: 60
-            failureThreshold: 20
+            failureThreshold: 30
       imagePullSecrets:
         - name: {{ .Values.secret.name }}
 

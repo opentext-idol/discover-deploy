@@ -29,6 +29,12 @@ spec:
           envFrom:
             - configMapRef:
                 name:  {{ .Values.datasets.locations.config }}
+          readinessProbe:
+{{ include "probe.content" . | indent 12 }}
+            failureThreshold: 2
+          livenessProbe:
+{{ include "probe.content" . | indent 12 }}
+            failureThreshold: 30
 
       imagePullSecrets:
         - name: {{ .Values.secret.name }}

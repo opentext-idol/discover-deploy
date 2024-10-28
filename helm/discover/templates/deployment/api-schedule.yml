@@ -36,6 +36,16 @@ spec:
               mountPath: /data/entity
             - name: {{ .Values.dataEntityVector.volume }}
               mountPath: /data/entity-vector
+          startupProbe:
+{{ include "probe.apiSchedule" . | indent 12 }}
+            initialDelaySeconds: 60
+            failureThreshold: 30
+          readinessProbe:
+{{ include "probe.apiSchedule" . | indent 12 }}
+            failureThreshold: 2
+          livenessProbe:
+{{ include "probe.apiSchedule" . | indent 12 }}
+            failureThreshold: 30
 
       volumes:
         - name: {{ .Values.dataSecurity.volume }}

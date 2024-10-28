@@ -35,18 +35,12 @@ spec:
                 name: {{ .Values.secret }}
             - configMapRef:
                 name: {{ .Values.config }}
-          startupProbe:
-{{ include "idolsolutions.auth.probe.keycloak" . | indent 12 }}
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            failureThreshold: 10
           readinessProbe:
 {{ include "idolsolutions.auth.probe.keycloak" .| indent 12 }}
             failureThreshold: 2
           livenessProbe:
 {{ include "idolsolutions.auth.probe.keycloak" . | indent 12 }}
-            periodSeconds: 60
-            failureThreshold: 20
+            failureThreshold: 30
 
         - name: auth-service-db
           image: "postgres:{{ .Values.db.version }}"
@@ -59,18 +53,12 @@ spec:
           volumeMounts:
             - name: {{ .Values.db.dataVolume }}
               mountPath: /var/lib/postgresql/data
-          startupProbe:
-{{ include "idolsolutions.auth.probe.postgres" (dict "username" .Values.db.username) | indent 12 }}
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            failureThreshold: 30
           readinessProbe:
 {{ include "idolsolutions.auth.probe.postgres" (dict "username" .Values.db.username) | indent 12 }}
             failureThreshold: 2
           livenessProbe:
 {{ include "idolsolutions.auth.probe.postgres" (dict "username" .Values.db.username) | indent 12 }}
-            periodSeconds: 60
-            failureThreshold: 20
+            failureThreshold: 30
       imagePullSecrets:
       {{- range .Values.global.imagePullSecrets }}
         - name: {{ . }}
