@@ -258,6 +258,8 @@ api:
   image: solutions-discover-api-service
   config: api-config
   secret: api-secret
+  process:
+    maxMemory: 2G
   filesConfig:
     configName: api-config-files
     volumeName: api-config-files
