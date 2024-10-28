@@ -13,6 +13,7 @@ external:
   protocol: &external-protocol http
   host: &external-host localhost
   port: &external-port 80
+  adminHost: &external-adminHost ""
 
 secret:
   name: docker-secret
@@ -69,6 +70,7 @@ auth:
     protocol: *external-protocol
     host: *external-host
     port: *external-port
+    adminHost: *external-adminHost
 
   # N.B. Remaining auth settings are not part of the discover-auth subchart
 
@@ -128,8 +130,7 @@ entity:
       queryPort: 9100
       indexPort: 9101
     ingress:
-      enabled: false
-      path: /content/
+      path: /entity-indexdb/
   vector:
     qms:
       enabled: false
@@ -143,7 +144,6 @@ entity:
         protocol: https
         aciPort: 16000
       ingress:
-        enabled: false
         path: /entity-vector-qms/
 
 filestore:
@@ -215,7 +215,6 @@ analysis:
     path: /
     jobsPath: /
   ingress:
-    enabled: true
     path: /nifi/
 
 audit:
@@ -248,7 +247,6 @@ datasets:
       name: dataset-locations-db-service
       queryPort: 9100
     ingress:
-      enabled: false
       path: /datasets/locations/db/
 
 api:

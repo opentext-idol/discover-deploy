@@ -29,37 +29,3 @@ spec:
                 name: {{ .Values.api.service.name }}
                 port:
                   number: {{ .Values.api.service.port }}
-          {{- if .Values.analysis.ingress.enabled }}
-          - path: /nifi-api(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.analysis.service.name }}
-                port:
-                  number: {{ .Values.analysis.service.port }}
-          - path: {{ .Values.analysis.ingress.path }}(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.analysis.service.name }}
-                port:
-                  number: {{ .Values.analysis.service.port }}
-          {{- end }}
-          {{- if .Values.entity.index.ingress.enabled }}
-          - path: {{ .Values.entity.index.ingress.path }}(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.entity.index.service.name }}
-                port:
-                  number: {{ .Values.entity.index.service.queryPort }}
-          {{- end }}
-          {{- if .Values.entity.vector.qms.ingress.enabled }}
-          - path: {{ .Values.entity.vector.qms.ingress.path }}(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.entity.vector.qms.service.name }}
-                port:
-                  number: {{ .Values.entity.vector.qms.service.aciPort }}
-          {{- end }}
