@@ -39,6 +39,7 @@ entity:
     heapNewSize: 100M
   vector:
     qms:
+      enabled: true
       replicas: 1
 filestore:
   dataVolumeSize: 10Gi

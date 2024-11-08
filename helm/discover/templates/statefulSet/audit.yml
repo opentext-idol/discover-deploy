@@ -34,18 +34,12 @@ spec:
           volumeMounts:
             - name: {{ .Values.audit.dataVolume }}
               mountPath: /var/lib/postgresql/data
-          startupProbe:
-{{ include "probe.postgres" (dict "username" .Values.audit.username) | indent 12 }}
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            failureThreshold: 30
           readinessProbe:
 {{ include "probe.postgres" (dict "username" .Values.audit.username) | indent 12 }}
             failureThreshold: 2
           livenessProbe:
 {{ include "probe.postgres" (dict "username" .Values.audit.username) | indent 12 }}
-            periodSeconds: 60
-            failureThreshold: 20
+            failureThreshold: 30
       volumes:
         - name: {{ .Values.audit.dataVolume }}
           persistentVolumeClaim:

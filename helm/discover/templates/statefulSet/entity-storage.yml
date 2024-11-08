@@ -32,6 +32,19 @@ spec:
           volumeMounts:
             - name: {{ .Values.entity.storage.dataVolume }}
               mountPath: /opt/cassandra/data
+          startupProbe:
+{{ include "probe.cassandra" . | indent 12 }}
+            initialDelaySeconds: 60
+            failureThreshold: 30
+          readinessProbe:
+{{ include "probe.cassandra" . | indent 12 }}
+            periodSeconds: 30
+            failureThreshold: 2
+          livenessProbe:
+{{ include "probe.cassandra" . | indent 12 }}
+            periodSeconds: 30
+            failureThreshold: 6
+
       volumes:
         - name: {{ .Values.entity.storage.dataVolume }}
           persistentVolumeClaim:

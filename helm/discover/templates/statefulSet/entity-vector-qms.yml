@@ -29,6 +29,20 @@ spec:
           envFrom:
             - configMapRef:
                 name:  {{ .Values.entity.vector.qms.config }}
+          volumeMounts:
+            - name: {{ .Values.dataEntityVector.volume }}
+              mountPath: /data/entity-vector
+          readinessProbe:
+{{ include "probe.qms" . | indent 12 }}
+            failureThreshold: 2
+          livenessProbe:
+{{ include "probe.qms" . | indent 12 }}
+            failureThreshold: 30
+
+      volumes:
+        - name: {{ .Values.dataEntityVector.volume }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataEntityVector.volumeClaim }}
       imagePullSecrets:
         - name: {{ .Values.secret.name }}
 
