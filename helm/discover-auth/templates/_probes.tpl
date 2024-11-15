@@ -19,6 +19,6 @@ exec:
 {{- end }}
 {{- define "idolsolutions.auth.probe.keycloak" -}}
 httpGet:
-  port: 8080
-  path: /health
+  port: 9000
+  path: /health/ready
 {{- end }}

@@ -28,7 +28,6 @@ data:
   KEYCLOAK_DATABASE_HOST: "localhost"
   KEYCLOAK_DATABASE_SCHEMA: "public"
   KC_HOSTNAME: "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}{{ .Values.external.path }}"
-  KC_HOSTNAME: "{{ .Values.external.protocol }}://{{ .Values.external.host }}:{{ .Values.external.port }}{{ .Values.external.path }}"
   {{- if .Values.external.adminHost }}
   KC_HOSTNAME_ADMIN: "{{ .Values.external.protocol }}://{{ .Values.external.adminHost }}:{{ .Values.external.port }}{{ .Values.external.path }}"
   {{- end }}
