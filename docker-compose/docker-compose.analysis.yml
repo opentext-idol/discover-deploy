@@ -34,7 +34,7 @@ services:
       - entity-data:/data/entity
       - entity-vector-data:/data/entity-vector
     ports:
-      - ${ISOL_ANALYSIS_SERVICE_DOCKER_PORT}:8090
+      - ${ISOL_ANALYSIS_SERVICE_DOCKER_PORT}:8080
     mac_address: 06-00-00-0A-00-01
     environment:
       - ISOL_API_SERVICE_APPLICATION_TYPE=DISCOVER
