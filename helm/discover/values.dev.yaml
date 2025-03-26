@@ -1,0 +1,61 @@
+licenseServer:
+  ip: "REQUIRED"
+external:
+  host: &external-host discover.192.168.49.2.nip.io
+  adminHost: &external-adminHost discoveradmin.192.168.49.2.nip.io
+secret:
+  base64dockerconfigjson: "REQUIRED"
+docker:
+  registry:
+    root: &docker-registry-root "REQUIRED"
+    nameSeparator: &docker-registry-nameSeparator ":"
+    versionSeparator: &docker-registry-versionSeparator "-"
+  customRegistry:
+    root: "192.168.49.1:5000/microfocusidolserver"
+  versions:
+    base: &docker-versions-base 25.1.0-SNAPSHOT
+    api: 25.1.0-SNAPSHOT
+    datasets: 25.1.0-SNAPSHOT
+    analysis: 25.1.0-SNAPSHOT
+    discoverData: 25.1.0-SNAPSHOT
+    discoverApi: 25.1.0-SNAPSHOT
+    discover: 25.1.0-SNAPSHOT
+
+auth:
+  external:
+    host: *external-host
+    adminHost: *external-adminHost
+  image:
+    registry:
+      root: *docker-registry-root
+      nameSeparator: *docker-registry-nameSeparator
+      versionSeparator: *docker-registry-versionSeparator
+    version: *docker-versions-base
+dataSecurity:
+  customImage: false
+entity:
+  storage:
+    maxHeapSize: 500M
+    heapNewSize: 100M
+  vector:
+    qms:
+      enabled: true
+      replicas: 1
+filestore:
+  dataVolumeSize: 10Gi
+analysis:
+  customImage: false
+  concurrency:
+    threads:
+      face: 2
+      vehicle: 2
+      object: 2
+datasets:
+  locations:
+    replicas: 1
+api:
+  replicas: 1
+dataEntityVector:
+  customImage: false
+discoverUi:
+  replicas: 1

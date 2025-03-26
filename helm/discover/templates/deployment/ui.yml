@@ -1,0 +1,54 @@
+{{- if .Values.discoverUi.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.discoverUi.name }}
+
+spec:
+  replicas: {{ .Values.discoverUi.replicas }}
+  selector:
+    matchLabels:
+      component: {{ .Values.discoverUi.name }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.discoverUi.name }}
+    spec:
+      containers:
+        - name: {{ .Values.discoverUi.container }}
+{{ include "image" (dict
+  "Values" .Values
+  "imageName" .Values.discoverUi.image
+  "version" .Values.docker.versions.discover
+  ) | indent 10 }}
+          imagePullPolicy: {{ .Values.docker.pullPolicy }}
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.discoverUi.config }}
+          readinessProbe:
+{{ include "probe.discover" . | indent 12 }}
+            failureThreshold: 2
+          livenessProbe:
+{{ include "probe.discover" . | indent 12 }}
+            failureThreshold: 30
+      imagePullSecrets:
+        - name: {{ .Values.secret.name }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.discoverUi.service.name }}
+
+spec:
+  type: ClusterIP
+  selector:
+    component: {{ .Values.discoverUi.name }}
+  ports:
+    - name: http
+      port: {{ .Values.discoverUi.service.port }}
+      targetPort: 80
+{{- end -}}

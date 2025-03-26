@@ -1,0 +1,38 @@
+# BEGIN COPYRIGHT NOTICE
+# Copyright 2023-2024 Open Text.
+# 
+# The only warranties for products and services of Open Text and its affiliates and licensors
+# ("Open Text") are as may be set forth in the express warranty statements accompanying such
+# products and services. Nothing herein should be construed as constituting an additional warranty.
+# Open Text shall not be liable for technical or editorial errors or omissions contained herein.
+# The information contained herein is subject to change without notice.
+#
+# END COPYRIGHT NOTICE
+
+# https://www.keycloak.org/server/reverseproxy#_exposed_path_recommendations
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: isol-ingress-auth-resources
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /resources/$1
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-Host $host;
+
+spec:
+  rules:
+    - http:
+        paths:
+          - path: {{ .Values.external.path }}resources/(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.service.name }}
+                port:
+                  number: {{ .Values.service.port }}
+{{- if .Values.external.host }}
+      host: {{ .Values.external.host | quote }}
+{{- end }}
