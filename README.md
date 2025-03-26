@@ -79,9 +79,8 @@ ingest documents from an existing IDOL setup, and preserve the IDOL ACL fields, 
      * Or, by granting access to actions: `UserRead`, `UserEncryptSecurityInfo`, `UserDecryptSecurityInfo`.
    * Ensure that `CheckEntitlement` in the `[UserSecurity]` section is set to false (this is the default value).
 2. Configure Discover to use your Community component:
-   * Set `ISOL_ENTITY_INDEXDB_COMMUNITY_PROTOCOL`, `ISOL_ENTITY_INDEXDB_COMMUNITY_HOST`, 
-     `ISOL_ENTITY_INDEXDB_COMMUNITY_ACI_PORT` and `ISOL_ENTITY_IDOL_SECURITY_TYPE` in `config/base.env`.
-   * Set `ISOL_ENTITY_IDOL_SECURITY_ACL_FORMAT` and `ISOL_ENTITY_IDOL_SECURITY_ACL_CHECK` in `config/entity.env`.
+   * Set `ISOL_ENTITY_INDEXDB_COMMUNITY_PROTOCOL`, `ISOL_ENTITY_INDEXDB_COMMUNITY_HOST` and
+     `ISOL_ENTITY_INDEXDB_COMMUNITY_ACI_PORT` in `config/base.env`.
    * Set `ISOL_ENTITY_IDOL_SECURITY_MODE` in `config/api.env`.
 3. Provide Security Info Keys (AES keyfile) for the `entity-indexdb` component:
    * See `custom/data-security/custom/README.md`.  This must be the Security Info Keys used by your Community component.
